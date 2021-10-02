@@ -10,7 +10,7 @@
           <div>
             <ul>
               <li>
-              {{team}}
+              {{data}}
               </li>
             </ul>
           Apex Pro Sens database
@@ -96,7 +96,7 @@ export default {
     const data = await $axios.$get('/api/v1/apexprolist')
     console.log(data);
     return {
-      team: data.team
+      data
     }
   }
   // async getData(){
