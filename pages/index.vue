@@ -9,8 +9,11 @@
         <v-card-title class="headline">
           <div>
             <ul>
-              <li>
-              {{data}}
+              <li v-for="item in response.data" :key="item.id">
+              {{item}}
+              <p v-for="value in item" :key="value">
+                {{value}}
+              </p>
               </li>
             </ul>
           Apex Pro Sens database
@@ -93,10 +96,10 @@
 <script>
 export default {
   async asyncData({$axios}) {
-    const data = await $axios.$get('/api/v1/apexprolist')
-    console.log(data);
+    const response = await $axios.$get('/api/v1/apexprolist')
+    console.log(response);
     return {
-      data
+      response
     }
   }
   // async getData(){
