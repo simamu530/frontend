@@ -8,68 +8,65 @@
       <v-card>
         <v-card-title class="headline">
           <div>
-            <ul>
-              <li v-for="item in response.data" :key="item.id">
-              {{item}}
-              <p v-for="value in item" :key="value">
-                {{value}}
-              </p>
-              </li>
-            </ul>
           Apex Pro Sens database
           </div>
         </v-card-title>
         <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
+          <div>
+            <table v-for="item in response.data" :key="item.id">
+                <thead>
+                  <th>チーム</th>
+                  <th>名前</th>
+                  <th>DPI</th>
+                  <th>マウス感度</th>
+                  <th>倍率感度</th>
+                  <th>Hz</th>
+                  <th>視野角(FOV)</th>
+                  <th>マウス</th>
+                  <th>モニター</th>
+                  <th>GPU</th>
+                  <th>解像度</th>
+                  <th>マウスパッド</th>
+                  <th>キーボード</th>
+                  <th>ヘッドセット</th>
+                </thead>
+                <tbody >
+                  <td>{{item.team}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.dpi}}</td>
+                  <td>{{item.mousesens}}</td>
+                  <td>{{item.multisens}}</td>
+                  <td>{{item.hz}}</td>
+                  <td>{{item.fov}}</td>
+                  <td>{{item.mouse}}</td>
+                  <td>{{item.monitor}}</td>
+                  <td>{{item.gpu}}</td>
+                  <td>{{item.resolution}}</td>
+                  <td>{{item.mousepad}}</td>
+                  <td>{{item.keyboard}}</td>
+                  <td>{{item.headset}}</td>
+                  <td><button class="editData">編集</button></td>
+                  <td><button class="delData">削除</button></td>
+                </tbody>
+              </table>
           </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
+
+          <div>
+            <input type="text" id="pro_team" placeholder="チーム">
+            <input type="text" id="pro_name" placeholder="名前">
+            <input type="text" id="pro_dpi" placeholder="dpi">
+            <input type="text" id="pro_mousesens" placeholder="マウス感度">
+            <input type="text" id="pro_multisens" placeholder="倍率感度">
+            <input type="text" id="pro_hz" placeholder="Hz">
+            <input type="text" id="pro_fov" placeholder="視野角">
+            <input type="text" id="pro_mouse" placeholder="マウス">
+            <input type="text" id="pro_monitor" placeholder="モニター">
+            <input type="text" id="pro_gpu" placeholder="gpu">
+            <input type="text" id="pro_resolution" placeholder="解像度">
+            <input type="text" id="pro_mousepad" placeholder="マウスパッド">
+            <input type="text" id="pro_keyboard" placeholder="キーボード">
+            <input type="text" id="pro_headset" placeholder="ヘッドセット">
+          </div>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -95,20 +92,25 @@
 
 <script>
 export default {
-  async asyncData({$axios}) {
-    const response = await $axios.$get('/api/v1/apexprolist')
-    console.log(response);
-    return {
-      response
+  // data() {
+  //   response
+  // },
+
+    async asyncData({$axios}) {
+      const response = await $axios.$get('/api/v1/apexprolist')
+      console.log(response);
+      return {
+        response
+      }
     }
-  }
-  // async getData(){
-  //   const res = await this.$axios('/api/v1/apexprolist')
-  //   =>
-  //   // console.log(res)
-  //   return {
-  //     team: res.data.team
-  //   }
-  // }
+    // async getData(){
+    //   const res = await this.$axios('/api/v1/apexprolist')
+    //   =>
+    //   // console.log(res)
+    //   return {
+    //     team: res.data.team
+    //   }
+    // }
+  
 }
 </script>
