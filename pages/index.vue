@@ -39,20 +39,20 @@
         </table>
     </div>
     <div>
-      <input type="text" id="pro_team" placeholder="チーム">
-      <input type="text" id="pro_name" placeholder="名前">
-      <input type="text" id="pro_dpi" placeholder="dpi">
-      <input type="text" id="pro_mousesens" placeholder="マウス感度">
-      <input type="text" id="pro_multisens" placeholder="倍率感度">
-      <input type="text" id="pro_hz" placeholder="Hz">
-      <input type="text" id="pro_fov" placeholder="視野角">
-      <input type="text" id="pro_mouse" placeholder="マウス">
-      <input type="text" id="pro_monitor" placeholder="モニター">
-      <input type="text" id="pro_gpu" placeholder="gpu">
-      <input type="text" id="pro_resolution" placeholder="解像度">
-      <input type="text" id="pro_mousepad" placeholder="マウスパッド">
-      <input type="text" id="pro_keyboard" placeholder="キーボード">
-      <input type="text" id="pro_headset" placeholder="ヘッドセット">
+      <input v-model="pro_team" type="text" id="pro_team" placeholder="チーム">
+      <input v-model="pro_name" type="text" id="pro_name" placeholder="名前">
+      <input v-model="pro_dpi" type="text" id="pro_dpi" placeholder="dpi">
+      <input v-model="pro_mousesens" type="text" id="pro_mousesens" placeholder="マウス感度">
+      <input v-model="pro_multisens" type="text" id="pro_multisens" placeholder="倍率感度">
+      <input v-model="pro_hz" type="text" id="pro_hz" placeholder="Hz">
+      <input v-model="pro_fov" type="text" id="pro_fov" placeholder="視野角">
+      <input v-model="pro_mouse" type="text" id="pro_mouse" placeholder="マウス">
+      <input v-model="pro_monitor" type="text" id="pro_monitor" placeholder="モニター">
+      <input v-model="pro_gpu" type="text" id="pro_gpu" placeholder="gpu">
+      <input v-model="pro_resolution" type="text" id="pro_resolution" placeholder="解像度">
+      <input v-model="pro_mousepad" type="text" id="pro_mousepad" placeholder="マウスパッド">
+      <input v-model="pro_keyboard" type="text" id="pro_keyboard" placeholder="キーボード">
+      <input v-model="pro_headset" type="text" id="pro_headset" placeholder="ヘッドセット">
       <button>追加</button>
     </div>
   
@@ -73,6 +73,12 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
+          <v-btn
+            collor="primary"
+            @click="test()"
+          >
+          test
+          </v-btn>
           <v-btn
             color="primary"
             nuxt
@@ -96,25 +102,55 @@
 
 <script>
 export default {
-  // data() {
-  //   response
-  // },
-
-    async asyncData({$axios}) {
-      const response = await $axios.$get('/api/v1/apexprolist')
-      console.log(response);
-      return {
-        response
-      }
+  data() {
+    return {
+      pro_team: null,
+      pro_name: null,
+      pro_dpi: null,
+      pro_mousesens: null,
+      pro_multisens: null,
+      pro_hz: null,
+      pro_fov: null,
+      pro_mouse: null,
+      pro_monitor: null,
+      pro_gpu: null,
+      pro_resolution: null,
+      pro_mousepad: null,
+      pro_keybboard: null,
+      pro_headset: null
     }
-    // async getData(){
-    //   const res = await this.$axios('/api/v1/apexprolist')
-    //   =>
-    //   // console.log(res)
+  },
+  methods: {
+    async test() {
+      const sendData = {
+        team :this.pro_team,
+        name : this.pro_name,
+        dpi :this.pro_dpi,
+        mousesens:this.pro_mousesens,
+        multisens:this.pro_multisens,
+        hz:this.pro_hz,
+        fov:this.pro_fov,
+        mouse:this.pro_mouse,
+        monitor:this.pro_monitor,
+        gpu:this.pro_gpu,
+        resolution:this.pro_resolution,
+        mousepad:this.pro_mousepad,
+        keyboard:this.pro_keybboard,
+        headset:this.pro_headset,
+      }
+      console.log(sendData);
+      await this.$axios.post('/api/v1/apexprolist', sendData).then(res => {console.log(res);
+      })
+    }
+  }
+    // async asyncData({$axios}) {
+    //   const response = await $axios.$get('/api/v1/apexprolist')
+    //   console.log(response);
     //   return {
-    //     team: res.data.team
+    //     response
     //   }
     // }
+    
   
 }
 </script>
