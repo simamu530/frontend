@@ -116,7 +116,7 @@ export default {
       pro_gpu: null,
       pro_resolution: null,
       pro_mousepad: null,
-      pro_keybboard: null,
+      pro_keyboard: null,
       pro_headset: null
     }
   },
@@ -142,14 +142,22 @@ export default {
       await this.$axios.post('/api/v1/apexprolist', sendData).then(res => {console.log(res);
       })
     }
-  }
-    // async asyncData({$axios}) {
-    //   const response = await $axios.$get('/api/v1/apexprolist')
-    //   console.log(response);
-    //   return {
-    //     response
-    //   }
-    // }
+  },
+  async asyncData({$axios}) {
+    const response = await $axios.$get('/api/v1/apexprolist')
+    console.log(response);
+    return {
+      response
+    }
+  },
+  result() {
+     axios.get('/api/v1/apexprolist')
+    .then(this.response = response.data)
+  },
+  mounted() {
+    result()
+  },
+
     
   
 }
