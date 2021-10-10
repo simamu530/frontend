@@ -3,6 +3,7 @@
     <div>
       <table v-for="item in response.data" :key="item.id">
           <thead>
+            <tr></tr>
             <th>チーム</th>
             <th>名前</th>
             <th>DPI</th>
@@ -53,7 +54,8 @@
       <input v-model="pro_mousepad" type="text" id="pro_mousepad" placeholder="マウスパッド">
       <input v-model="pro_keyboard" type="text" id="pro_keyboard" placeholder="キーボード">
       <input v-model="pro_headset" type="text" id="pro_headset" placeholder="ヘッドセット">
-      <button>追加</button>
+      <v-btn collor="primary"
+            @click="test()">追加</v-btn>
     </div>
   
   <v-row justify="center" align="center">
@@ -150,13 +152,13 @@ export default {
       response
     }
   },
-  result() {
-     axios.get('/api/v1/apexprolist')
-    .then(this.response = response.data)
-  },
-  mounted() {
-    result()
-  },
+  // result() {
+  //    axios.get('/api/v1/apexprolist')
+  //   .then(this.response = response.data)
+  // },
+  // mounted() {
+  //   result()
+  // },
 
     
   
