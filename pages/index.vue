@@ -1,7 +1,7 @@
 <template>
   <v-main>
     <div>
-      <table v-for="item in response.data" :key="item.id">
+      <table v-for="item in items" :key="item.id">
           <thead>
             <tr></tr>
             <th>チーム</th>
@@ -119,7 +119,8 @@ export default {
       pro_resolution: null,
       pro_mousepad: null,
       pro_keyboard: null,
-      pro_headset: null
+      pro_headset: null,
+      items:[]
     }
   },
   methods: {
@@ -144,31 +145,16 @@ export default {
       await this.$axios.post('/api/v1/apexprolist', sendData).then(res => {console.log(res);
       })
       this.asyncData();
-      const response = await $axios.$get('/api/v1/apexprolist');
-      return {
-      response
-      }
     },
-      async asyncData({$axios}) {
-      const response = await $axios.$get('/api/v1/apexprolist')
-      console.log(response);
-      return {
-        response
-      }
+      async asyncData() {
+      await  this.$axios.$get('/api/v1/apexprolist')
+      .then(res => {
+        this.items = res.data;
+      })
     },
   },
   created() {
     this.asyncData();
   }
-  // result() {
-  //    axios.get('/api/v1/apexprolist')
-  //   .then(this.response = response.data)
-  // },
-  // mounted() {
-  //   result()
-  // },
-
-    
-  
 }
 </script>
