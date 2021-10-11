@@ -76,7 +76,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn
-            collor="primary"
+            color="primary"
             @click="test()"
           >
           test
@@ -143,15 +143,23 @@ export default {
       console.log(sendData);
       await this.$axios.post('/api/v1/apexprolist', sendData).then(res => {console.log(res);
       })
-    }
-  },
-  async asyncData({$axios}) {
-    const response = await $axios.$get('/api/v1/apexprolist')
-    console.log(response);
-    return {
+      this.asyncData();
+      const response = await $axios.$get('/api/v1/apexprolist');
+      return {
       response
-    }
+      }
+    },
+      async asyncData({$axios}) {
+      const response = await $axios.$get('/api/v1/apexprolist')
+      console.log(response);
+      return {
+        response
+      }
+    },
   },
+  created() {
+    this.asyncData();
+  }
   // result() {
   //    axios.get('/api/v1/apexprolist')
   //   .then(this.response = response.data)
