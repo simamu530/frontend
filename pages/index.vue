@@ -40,6 +40,7 @@
             <td><button class="delData">削除</button></td>
           </tbody>
         </table>
+        <p>平均</p>
     </div>
     <!-- 計算テストエリア -->
     <!-- <v-data-table
