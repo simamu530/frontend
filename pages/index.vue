@@ -18,6 +18,7 @@
             <th>マウスパッド</th>
             <th>キーボード</th>
             <th>ヘッドセット</th>
+            <th>eDpi</th>
           </thead>
           <tbody>
             <td>{{item.team}}</td>
@@ -34,11 +35,37 @@
             <td>{{item.mousepad}}</td>
             <td>{{item.keyboard}}</td>
             <td>{{item.headset}}</td>
+            <td>{{item.dpi * item.mousesens}}</td>
             <td><button class="editData">編集</button></td>
             <td><button class="delData">削除</button></td>
           </tbody>
         </table>
     </div>
+    <!-- 計算テストエリア -->
+    <!-- <v-data-table
+      :headers="headers"
+      :items="items"
+      :search="serchTrigger"
+      :ref="summary"
+    >
+    <template v-slot:top>
+      <v-text-field v-model="serch" label="検索" class="mx-4">
+      </v-text-field>
+    </template>
+    <template v-slot:body.append>
+      <tr>
+        <td></td>
+        <th>合計</th>
+        <td>{{edpi_sum}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <th>平均</th>
+        <td>{{edpi_avg}}</td>
+      </tr>
+    </template>
+    </v-data-table> -->
+    <!-- ここまで -->
     <div>
       <input v-model="pro_team" type="text" id="pro_team" placeholder="チーム">
       <input v-model="pro_name" type="text" id="pro_name" placeholder="名前">
@@ -120,7 +147,10 @@ export default {
       pro_mousepad: null,
       pro_keyboard: null,
       pro_headset: null,
-      items:[]
+      items:[],
+      search:'',
+      edpi_sum: 0,
+      edpi_avg: 0,
     }
   },
   methods: {
@@ -150,11 +180,40 @@ export default {
       await  this.$axios.$get('/api/v1/apexprolist')
       .then(res => {
         this.items = res.data;
+        console.log(res.data);
+        console.log(res.data.length);
+        edpi = res.data[1].dpi * res.data[1].mousesens;
+        console.log(edpi);
+        // edpi = this.items.dpi * this.items.mousesens;
+        // const arr = edpi;
+        // let sum = 0;
+        // for (let i = 0; i < res.data.length; i++) {
+        //   sum += arr[i];
+        // }
+        // console.log(sum / arr.length);
       })
     },
+    // calc: function() {
+    //   this.edpi_sum = 0
+
+    //   const summary = this.$refs.summary.children[0]
+    //   summary.filterdItems.forEach((item) => {
+    //     this.edpi_sum += parseInt(item.)
+        
+    //   });
+    // }
+
   },
   created() {
     this.asyncData();
-  }
+  },
+  // computed: {
+  //   searchTrigger: function() {
+  //     this.$nextTick(function() {
+  //       this.calc()
+  //     })
+  //     return this.search
+  //   }
+  // },
 }
 </script>
