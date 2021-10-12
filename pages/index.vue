@@ -183,14 +183,14 @@ export default {
         this.items = res.data;
         console.log(res.data);
         console.log(res.data.length);
-        edpi = res.data[1].dpi * res.data[1].mousesens;
-        console.log(edpi);
         // edpi = this.items.dpi * this.items.mousesens;
         // const arr = edpi;
         // let sum = 0;
-        // for (let i = 0; i < res.data.length; i++) {
-        //   sum += arr[i];
-        // }
+        for (let i = 0, j = 0; i < 5; i++ ,j++) {
+          const edpi = res.data[i].dpi*res.data[i].mousesens
+            console.log(edpi);
+          
+        }
         // console.log(sum / arr.length);
       })
     },
