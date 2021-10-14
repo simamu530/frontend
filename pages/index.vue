@@ -189,13 +189,13 @@ export default {
         // let sum = 0;
         for (let i = 0; i < 5; i++ ) {
           const edpi = res.data[i].dpi*res.data[i].mousesens;
-            // console.log(edpi);
-            const entE = edpi;
+            console.log(edpi);
+            // const entE = edpi;
             // console.log(entE+edpi)
-          for (let j = 0; j < 1; j++){
-            const sum = entE + edpi;
-            console.log(sum);
-          }
+          // for (let j = 0; j < 1; j++){
+          //   const sum = entE + edpi;
+          //   console.log(sum);
+          // }
         }
 
         // console.log(sum / arr.length);
