@@ -19,6 +19,7 @@
             <th>キーボード</th>
             <th>ヘッドセット</th>
             <th>eDpi</th>
+            <th>合計</th>
           </thead>
           <tbody>
             <td>{{item.team}}</td>
@@ -36,6 +37,7 @@
             <td>{{item.keyboard}}</td>
             <td>{{item.headset}}</td>
             <td>{{item.dpi * item.mousesens}}</td>
+            <td>{{item.sum}}</td>
             <td><button class="editData">編集</button></td>
             <td><button class="delData">削除</button></td>
           </tbody>
@@ -150,9 +152,6 @@ export default {
       pro_headset: null,
       items:[],
       search:'',
-      edpi_sum: 0,
-      edpi_avg: 0,
-
     }
   },
   methods: {
@@ -179,14 +178,14 @@ export default {
       this.asyncData();
     },
       async asyncData() {
-      await  this.$axios.get('/api/v1/apexprolist')
+      await  this.$axios.$get('/api/v1/apexprolist')
       .then(res => {
         this.items = res.data;
         console.log(res.data);
         console.log(res.data.length);
         let sum = 0;
-        for (let i = 0; i < res.data.data.length; i++ ) {
-          sum += res.data.data[i].dpi*res.data.data[i].mousesens;
+        for (let i = 0; i < res.data.length; i++ ) {
+          sum += res.data[i].dpi*res.data[i].mousesens;
             console.log(sum);
           
         }
