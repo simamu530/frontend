@@ -179,23 +179,16 @@ export default {
       this.asyncData();
     },
       async asyncData() {
-      await  this.$axios.$get('/api/v1/apexprolist')
+      await  this.$axios.get('/api/v1/apexprolist')
       .then(res => {
         this.items = res.data;
         console.log(res.data);
         console.log(res.data.length);
-        // edpi = this.items.dpi * this.items.mousesens;
-        // const arr = edpi;
-        // let sum = 0;
-        for (let i = 0; i < 5; i++ ) {
-          const edpi = res.data[i].dpi*res.data[i].mousesens;
-            console.log(edpi);
-            // const entE = edpi;
-            // console.log(entE+edpi)
-          // for (let j = 0; j < 1; j++){
-          //   const sum = entE + edpi;
-          //   console.log(sum);
-          // }
+        let sum = 0;
+        for (let i = 0; i < res.data.data.length; i++ ) {
+          sum += res.data.data[i].dpi*res.data.data[i].mousesens;
+            console.log(sum);
+          
         }
 
         // console.log(sum / arr.length);
