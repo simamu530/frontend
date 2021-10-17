@@ -43,32 +43,8 @@
           </tbody>
         </table>
         <p>平均</p>
+        <p>{{avg_edpi}}</p>
     </div>
-    <!-- 計算テストエリア -->
-    <!-- <v-data-table
-      :headers="headers"
-      :items="items"
-      :search="serchTrigger"
-      :ref="summary"
-    >
-    <template v-slot:top>
-      <v-text-field v-model="serch" label="検索" class="mx-4">
-      </v-text-field>
-    </template>
-    <template v-slot:body.append>
-      <tr>
-        <td></td>
-        <th>合計</th>
-        <td>{{edpi_sum}}</td>
-      </tr>
-      <tr>
-        <td></td>
-        <th>平均</th>
-        <td>{{edpi_avg}}</td>
-      </tr>
-    </template>
-    </v-data-table> -->
-    <!-- ここまで -->
     <div>
       <input v-model="pro_team" type="text" id="pro_team" placeholder="チーム">
       <input v-model="pro_name" type="text" id="pro_name" placeholder="名前">
@@ -152,6 +128,8 @@ export default {
       pro_headset: null,
       items:[],
       search:'',
+      sum:"",
+      avg_edpi:"",
     }
   },
   methods: {
@@ -178,42 +156,23 @@ export default {
       this.asyncData();
     },
       async asyncData() {
-      await  this.$axios.$get('/api/v1/apexprolist')
+      await  this.$axios.get('/api/v1/apexprolist')
       .then(res => {
         this.items = res.data;
         console.log(res.data);
-        console.log(res.data.length);
-        let sum = 0;
+        console.log(res.data.data.length);
         for (let i = 0; i < res.data.length; i++ ) {
-          sum += res.data[i].dpi*res.data[i].mousesens;
-            console.log(sum);
+           this.sum += res.data[i].dpi*res.data[i].mousesens;
+            console.log(this.sum);
           
         }
-
-        // console.log(sum / arr.length);
+        const avg_edpi=this.sum / res.data.length;
+        console.log(avg_edpi);
       })
     },
-    // calc: function() {
-    //   this.edpi_sum = 0
-
-    //   const summary = this.$refs.summary.children[0]
-    //   summary.filterdItems.forEach((item) => {
-    //     this.edpi_sum += parseInt(item.)
-        
-    //   });
-    // }
-
   },
   created() {
     this.asyncData();
   },
-  // computed: {
-  //   searchTrigger: function() {
-  //     this.$nextTick(function() {
-  //       this.calc()
-  //     })
-  //     return this.search
-  //   }
-  // },
 }
 </script>
