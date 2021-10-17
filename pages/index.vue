@@ -128,8 +128,8 @@ export default {
       pro_headset: null,
       items:[],
       search:'',
-      sum:"",
-      avg_edpi:"",
+      sum:0,
+      avg_edpi:0,
     }
   },
   methods: {
@@ -158,16 +158,16 @@ export default {
       async asyncData() {
       await  this.$axios.get('/api/v1/apexprolist')
       .then(res => {
-        this.items = res.data;
+        this.items = res.data.data;
         console.log(res.data);
         console.log(res.data.data.length);
-        for (let i = 0; i < res.data.length; i++ ) {
-           this.sum += res.data[i].dpi*res.data[i].mousesens;
+        for (let i = 0; i < res.data.data.length; i++ ) {
+           this.sum += res.data.data[i].dpi*res.data.data[i].mousesens;
             console.log(this.sum);
           
         }
-        const avg_edpi=this.sum / res.data.length;
-        console.log(avg_edpi);
+        this.avg_edpi=this.sum / res.data.data.length;
+        // console.log(this.avg_edpi);
       })
     },
   },
