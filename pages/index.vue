@@ -46,8 +46,8 @@
         <p>{{avg_edpi}}</p>
     </div>
     <div>
-      <input v-model="pro_team" type="text" id="pro_team" placeholder="チーム">
-      <input v-model="pro_name" type="text" id="pro_name" placeholder="名前">
+      <input v-model="pro_team" type="text" id="pro_team" placeholder="チーム" color="white">
+      <input v-model="pro_name" type="text" id="pro_name" placeholder="名前" class="white ligten-1">
       <input v-model="pro_dpi" type="text" id="pro_dpi" placeholder="dpi">
       <input v-model="pro_mousesens" type="text" id="pro_mousesens" placeholder="マウス感度">
       <input v-model="pro_multisens" type="text" id="pro_multisens" placeholder="倍率感度">
@@ -63,7 +63,11 @@
       <v-btn collor="primary"
             @click="test()">追加</v-btn>
     </div>
-  
+    <v-data-table
+    :headers="headers"
+    :items="items"
+    :items-per-page="2"
+    ></v-data-table>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6">
       <v-card class="logo py-4 d-flex justify-center">
@@ -127,6 +131,22 @@ export default {
       pro_keyboard: null,
       pro_headset: null,
       items:[],
+      headers:[
+        { text: 'チーム', value: 'team'},
+        { text: '名前', value: 'name'},
+        { text: 'チーム', value: 'dpi'},
+        { text: 'DPI', value: 'dpi'},
+        { text: 'マウス感度', value: 'mousesens'},
+        { text: '倍率感度', value: 'multisens'},
+        { text: 'Hz', value: 'hz'},
+        { text: '視野角', value: 'FOV'},
+        { text: 'モニター', value: 'monitor'},
+        { text: 'GPU', value: 'gpu'},
+        { text: '解像度', value: 'resolution'},
+        { text: 'マウスパッド', value: 'mousepad'},
+        { text: 'キーボード', value: 'keyboard'},
+        { text: 'ヘッドセット', value: 'headset'},
+      ],
       search:'',
       sum:0,
       avg_edpi:0,
