@@ -514,12 +514,28 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
+        const testid = Object.assign(this.items[this.editedIndex].id);
+        console.log(Object.assign(this.items[this.editedIndex].id));
+        console.log(Object.assign(this.items[this.editedIndex], this.editedItem));
         Object.assign(this.items[this.editedIndex], this.editedItem)
+        const sendData = Object.assign(this.items[this.editedIndex])
+        try {
+          this.$axios.put('/api/v1/apexprolist/' + testid, sendData)
+          .then( res => {
+            console.log(res);
+            console.log("success");
+          }
+          )
+        } catch (error) {
+          console.log(error);
+        }
       } else {
         this.items.push(this.editedItem)
       }
       this.close()
     },
+
+    //10.21追加
   },
   created() {
     this.asyncData();
