@@ -1,50 +1,8 @@
 <template>
   <v-main>
-    <div>
-      <table v-for="item in items" :key="item.id">
-          <thead>
-            <tr></tr>
-            <th>チーム</th>
-            <th>名前</th>
-            <th>DPI</th>
-            <th>マウス感度</th>
-            <th>倍率感度</th>
-            <th>Hz</th>
-            <th>視野角(FOV)</th>
-            <th>マウス</th>
-            <th>モニター</th>
-            <th>GPU</th>
-            <th>解像度</th>
-            <th>マウスパッド</th>
-            <th>キーボード</th>
-            <th>ヘッドセット</th>
-            <th>eDpi</th>
-            <th>合計</th>
-          </thead>
-          <tbody>
-            <td>{{item.team}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.dpi}}</td>
-            <td>{{item.mousesens}}</td>
-            <td>{{item.multisens}}</td>
-            <td>{{item.hz}}</td>
-            <td>{{item.fov}}</td>
-            <td>{{item.mouse}}</td>
-            <td>{{item.monitor}}</td>
-            <td>{{item.gpu}}</td>
-            <td>{{item.resolution}}</td>
-            <td>{{item.mousepad}}</td>
-            <td>{{item.keyboard}}</td>
-            <td>{{item.headset}}</td>
-            <td>{{item.dpi * item.mousesens}}</td>
-            <td>{{item.sum}}</td>
-            <td><button class="editData">編集</button></td>
-            <td><button class="delData">削除</button></td>
-          </tbody>
-        </table>
+    
         <p>平均</p>
         <p>{{avg_edpi}}</p>
-    </div>
     <div>
       <input v-model="pro_team"  id="pro_team" placeholder="チーム" class="grey lighten-2">
       <input v-model="pro_name" type="text" id="pro_name" placeholder="名前" class="grey lighten-2">
