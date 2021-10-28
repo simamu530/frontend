@@ -398,26 +398,25 @@ export default {
   },
   methods: {
     async test() {
-      const sendData = {
-        team :this.pro_team,
-        name : this.pro_name,
-        dpi :this.pro_dpi,
-        mousesens:this.pro_mousesens,
-        multisens:this.pro_multisens,
-        hz:this.pro_hz,
-        fov:this.pro_fov,
-        mouse:this.pro_mouse,
-        monitor:this.pro_monitor,
-        gpu:this.pro_gpu,
-        resolution:this.pro_resolution,
-        mousepad:this.pro_mousepad,
-        keyboard:this.pro_keyboard,
-        headset:this.pro_headset,
+      if (this.editedIndex > -1) {
+        const testid = Object.assign(this.items[this.editedIndex].id);
+        console.log(Object.assign(this.items[this.editedIndex].id));
+        console.log(Object.assign(this.items[this.editedIndex], this.editedItem));
+        Object.assign(this.items[this.editedIndex], this.editedItem)
+        const sendData = Object.assign(this.items[this.editedIndex])
+        try {
+          this.$axios.post('/api/v1/apexprolist/' + testid, sendData)
+          .then( res => {
+            console.log(res);
+            console.log("追加成功");
+          }
+          )
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        this.items.push(this.editedItem)
       }
-      console.log(sendData);
-      await this.$axios.post('/api/v1/apexprolist', sendData).then(res => {console.log(res);
-      })
-      this.asyncData();
     },
       async asyncData() {
       await  this.$axios.get('/api/v1/apexprolist')
