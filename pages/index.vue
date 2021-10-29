@@ -217,9 +217,17 @@
                   </v-btn>
                   <v-btn
                     text
-                    @click="save"
+                    @click="addItem()"
+                    v-if="editedIndex == -1"
                   >
-                  保存
+                  追加するボタンです
+                  </v-btn>
+                  <v-btn
+                    text
+                    @click="save"
+                    v-else
+                  >
+                  保存 更新するボタン
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -261,47 +269,7 @@
       </template>
     </v-data-table>
   </v-app>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          <div>
-          Apex Pro Sens database
-          </div>
-        </v-card-title>
-        <v-card-text>
-          
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            @click="test()"
-          >
-          test
-          </v-btn>
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-          <v-btn
-            color="primary"
-            nuxt
-            to="/three-column"
-          >
-            three
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  
   </v-main>
 </template>
 
@@ -398,25 +366,26 @@ export default {
   },
   methods: {
     async test() {
-      if (this.editedIndex > -1) {
-        const testid = Object.assign(this.items[this.editedIndex].id);
-        console.log(Object.assign(this.items[this.editedIndex].id));
-        console.log(Object.assign(this.items[this.editedIndex], this.editedItem));
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-        const sendData = Object.assign(this.items[this.editedIndex])
-        try {
-          this.$axios.post('/api/v1/apexprolist/' + testid, sendData)
-          .then( res => {
-            console.log(res);
-            console.log("追加成功");
-          }
-          )
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        this.items.push(this.editedItem)
+      const sendData = {
+        team :this.pro_team,
+        name : this.pro_name,
+        dpi :this.pro_dpi,
+        mousesens:this.pro_mousesens,
+        multisens:this.pro_multisens,
+        hz:this.pro_hz,
+        fov:this.pro_fov,
+        mouse:this.pro_mouse,
+        monitor:this.pro_monitor,
+        gpu:this.pro_gpu,
+        resolution:this.pro_resolution,
+        mousepad:this.pro_mousepad,
+        keyboard:this.pro_keyboard,
+        headset:this.pro_headset,
       }
+      console.log(sendData);
+      await this.$axios.post('/api/v1/apexprolist', sendData).then(res => {console.log(res);
+      })
+      this.asyncData();
     },
       async asyncData() {
       await  this.$axios.get('/api/v1/apexprolist')
@@ -434,6 +403,17 @@ export default {
       })
     },
     //テーブルの編集機能
+
+    async addItem() {
+      console.log("test");
+      console.log(this.editedItem);//入力項目のデータが取得できてるか、確認
+      await
+      this.$axios.post('/api/v1/apexprolist',this.editedItem)
+      .then(()=>{
+        this.asyncData();
+        this.close(); //データの反映を行うために実装してある
+      })
+    },
     initialize () {
       this.items
     },
