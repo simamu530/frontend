@@ -424,12 +424,15 @@ export default {
     },
     deleteItem (item) {
       this.editedIndex = this.items.indexOf(item)
+      console.log(this.editexIndex+"Index");
       this.editedItem = Object.assign({}, item)
+      console.log(this.editexItem+"Item");
       this.dialogDelete = true
     },
 
     deleteItemConfirm () {
       this.items.splice(this.editedIndex, 1)
+      console.log(this.items+"アイテムス");
       const testid = Object.assign(this.items[this.editedIndex].id);
         console.log(Object.assign(this.items[this.editedIndex].id));
         console.log(Object.assign(this.items[this.editedIndex], this.editedItem));
