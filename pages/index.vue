@@ -431,13 +431,13 @@ export default {
     },
 
     deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
-      console.log(this.items+"アイテムス");
       const testid = Object.assign(this.items[this.editedIndex].id);
         console.log(Object.assign(this.items[this.editedIndex].id));
         console.log(Object.assign(this.items[this.editedIndex], this.editedItem));
         Object.assign(this.items[this.editedIndex], this.editedItem)
         const sendData = Object.assign(this.items[this.editedIndex])
+        this.items.splice(this.editedIndex, 1)
+         console.log(this.items+"アイテムス");
         try {
           this.$axios.delete('/api/v1/apexprolist/' + testid, sendData)
           .then( res => {
