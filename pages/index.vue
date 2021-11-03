@@ -440,7 +440,7 @@ export default {
         // console.log(this.avg_edpi);
         this.dpi400=this.sum / 400;
         this.dpi800=this.sum / 800;
-        this.dpi160 0= (this.sum / 1600);
+        this.dpi1600 = (this.sum / 1600);
       })
     },
     //テーブルの編集機能
