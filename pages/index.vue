@@ -440,7 +440,7 @@ export default {
         // console.log(this.avg_edpi);
         this.dpi400=this.sum / 400;
         this.dpi800=this.sum / 800;
-        this.dpi1600=this.sum / 1600;
+        this.dpi160 0= (this.sum / 1600);
       })
     },
     //テーブルの編集機能
@@ -478,7 +478,7 @@ export default {
         Object.assign(this.items[this.editedIndex], this.editedItem)
         const sendData = Object.assign(this.items[this.editedIndex])
         this.items.splice(this.editedIndex, 1)
-         console.log(this.items+"アイテムス");
+         console.log(this.items);
         try {
           this.$axios.delete('https://protected-refuge-26791.herokuapp.com/api/v1/apexprolist/' + testid, sendData)
           .then( res => {
