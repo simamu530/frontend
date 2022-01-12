@@ -10,7 +10,7 @@
         </footer>
       </blockquote>
       <div>
-        <HeaderAuth />
+        
         <div class="card">
           <p>ログイン</p>
           <div class="form">
