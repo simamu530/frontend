@@ -105,6 +105,11 @@ export default {
           icon: 'mdi-chart-bubble',
           title: '未定',
           to: '/inspire'
+        },
+        {
+          icon: 'mdi-suit-hearts',
+          title: 'My Settings',
+          to: '/savesetting'
         }
       ],
       miniVariant: false,
