@@ -16,7 +16,7 @@
               <v-text-field
                 v-model="keyboard"
                 label="現在使っているキーボード（入力必須のみあるテキストフィールド）"
-                :rules="[requierd]"
+                :rules="[required]"
                 required
               >
               </v-text-field>
