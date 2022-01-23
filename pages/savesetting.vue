@@ -22,6 +22,13 @@
                     >
                     </v-text-field>
                     <v-text-field
+                      v-model="dpi"
+                      label="DPI"
+                      type="number"
+                      :rules="[required]"
+                    >
+                    </v-text-field>
+                    <v-text-field
                       v-model="mouse_sens"
                       label="マウス感度"
                       type="number"
@@ -114,6 +121,11 @@ export default {
           value: "mouse"
         },
         {
+          text: "DPI",
+          sortable: true,
+          value: "dpi"
+        },
+        {
           text: "マウス感度",
           sortable: true,
           value: "mouse_sens"
@@ -152,6 +164,7 @@ export default {
       items:[],
       game_title: "",
       mouse: "",
+      dpi: "",
       mouse_sens: "",
       multi_sens: "",
       hz:"",
@@ -179,6 +192,7 @@ export default {
       this.items.push({
         "game_title": this.game_title,
         "mouse": this.mouse,
+        "dpi": this.dpi,
         "mouse_sens": this.mouse_sens,
         "multi_sens": this.multi_sens,
         "hz": this.hz,
