@@ -206,9 +206,10 @@ export default {
       this.$refs.setting_form.reset()
     },
   },
-  mounted() {
-    axios.get('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting')
+  mounted: function(){
+    axios.get('https://protected-refuge-26791.herokuapp.com/api/v1/apexprolist/')
     .then(response => console.log(response))
+    .catch(error => console.log(error))
   }
 }
 </script>
