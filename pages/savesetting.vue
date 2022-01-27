@@ -99,6 +99,7 @@
           sort-by="name"
           hide-default-footer
           class="elevation-1"
+          loading
           loading-text="Loading... Please wait"
         >
         </v-data-table>
