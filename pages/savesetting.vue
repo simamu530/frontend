@@ -5,7 +5,7 @@
         <v-card-title align="center">現在の設定状況</v-card-title>
         <v-expansion-panels>
           <v-expansion-panel>
-            <v-expansion-panel-header>入力欄を表示する</v-expansion-panel-header>
+            <v-expansion-panel-header color="primary">入力欄を表示する</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-form ref="setting_form">
                   <v-card-text>
@@ -96,8 +96,10 @@
         <v-data-table
           :headers="headers"
           :items="items"
-          :items-per-page="5"
+          sort-by="name"
+          hide-default-footer
           class="elevation-1"
+          loading-text="Loading... Please wait"
         >
         </v-data-table>
       </v-card>
@@ -203,18 +205,26 @@ export default {
         "res": this.res,
       }
       this.$axios.$post('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting', sendData)
+      .then(this.asyncData)
       .catch(error => console.log(error))
     },
+
     reset() {
       this.$refs.setting_form.reset()
     },
-  },
-  mounted: function(){
-    this.$axios.$get('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting')
+
+    async asyncData(){
+      await this.$axios.$get('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting')
     .then(res => {
-      this.items = res.data
+      this.items = res.data;
+      console.log(res)
     })
     .catch(error => console.log(error))
+    }
+  },
+  mounted: function(){
+    
+    this.asyncData()
   },
 }
 </script>

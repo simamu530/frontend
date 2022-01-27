@@ -63,6 +63,7 @@
           sort-by="name"
           hide-default-footer
           class="elevation-1"
+          loading-text="Loading... Please wait"
           >
           <template v-slot:top>
             <v-toolbar
@@ -254,14 +255,14 @@
                       @click="addItem()"
                       v-if="editedIndex == -1"
                     >
-                    追加するボタンです
+                    追加
                     </v-btn>
                     <v-btn
                       text
                       @click="save"
                       v-else
                     >
-                    保存 更新するボタン
+                    更新
                     </v-btn>
                   </v-card-actions>
                 </v-card>
