@@ -163,16 +163,16 @@ export default {
         },
       ],
       items:[],
-      game_title: "",
-      mouse: "",
-      dpi: "",
-      mouse_sens: "",
-      multi_sens: "",
-      hz:"",
-      mouse_pad: "",
-      keyboard: "",
-      fov:"",
-      res:"",
+      game_title: null,
+      mouse: null,
+      dpi: null,
+      mouse_sens: null,
+      multi_sens: null,
+      hz:null,
+      mouse_pad: null,
+      keyboard: null,
+      fov:null,
+      res:null,
       
       success: false,
 
@@ -190,7 +190,7 @@ export default {
       } else {
         this.success = false;
       }
-      this.items.push({
+      const sendData = {
         "game_title": this.game_title,
         "mouse": this.mouse,
         "dpi": this.dpi,
@@ -201,7 +201,9 @@ export default {
         "keyboard": this.keyboard,
         "fov": this.fov,
         "res": this.res,
-      });
+      }
+      this.$axios.$post('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting', sendData)
+      .catch(error => console.log(error))
     },
     reset() {
       this.$refs.setting_form.reset()
@@ -209,7 +211,9 @@ export default {
   },
   mounted: function(){
     this.$axios.$get('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting')
-    .then(res => console.log(res.data))
+    .then(res => {
+      this.items = res.data
+    })
     .catch(error => console.log(error))
   },
 }
