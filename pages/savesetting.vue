@@ -209,8 +209,8 @@ export default {
   },
   mounted: function(){
     this.$axios.$get('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting')
-    .then(response => console.log(response))
+    .then(res => console.log(res.data))
     .catch(error => console.log(error))
-  }
+  },
 }
 </script>
