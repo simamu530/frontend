@@ -99,7 +99,7 @@
           sort-by="name"
           hide-default-footer
           class="elevation-1"
-          loading
+          :loading="loading"
           loading-text="Loading... Please wait"
         >
         </v-data-table>
@@ -177,6 +177,8 @@ export default {
       fov:null,
       res:null,
       
+      loading: true,
+
       success: false,
 
       //入力ルール
@@ -215,10 +217,12 @@ export default {
     },
 
     async asyncData(){
+      this.loading = true;
       await this.$axios.$get('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting')
     .then(res => {
       this.items = res.data;
       console.log(res)
+      this.loading = false;
     })
     .catch(error => console.log(error))
     }
