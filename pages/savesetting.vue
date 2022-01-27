@@ -102,6 +102,14 @@
           :loading="loading"
           loading-text="Loading... Please wait"
         >
+        <template v-slot:item.actions="{ item }">
+          <v-icon
+          small
+          @click="delateItem(item)"
+          >
+          mdi-delete
+          </v-icon>
+        </template>
         </v-data-table>
       </v-card>
     </v-app>
@@ -214,6 +222,14 @@ export default {
 
     reset() {
       this.$refs.setting_form.reset()
+    },
+
+    deleteItem (item) {
+      this.editedIndex = this.items.indexOf(item)
+      console.log(this.editexIndex+"Index");
+      this.editedItem = Object.assign({}, item)
+      console.log(this.editexItem+"Item");
+      this.dialogDelete = true
     },
 
     async asyncData(){
