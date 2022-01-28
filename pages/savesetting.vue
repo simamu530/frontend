@@ -200,7 +200,7 @@ export default {
       res:null,
       
       loading: true,
-      editedIndex: 0,
+      editedIndex: -1,
       dialogDelete: false,
       success: false,
 
@@ -266,9 +266,7 @@ export default {
 
     deleteItem (item) {
       this.editedIndex = this.items.indexOf(item)
-      console.log(this.editedIndex+"Index");
       this.editedItem = Object.assign({}, item)
-      console.log(this.editedItem+"Item");
       this.dialogDelete = true
     },
     deleteItemConfirm () {
