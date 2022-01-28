@@ -105,11 +105,22 @@
         <template v-slot:item.actions="{ item }">
           <v-icon
           small
-          @click="delateItem(item)"
+          @click="deleteItem(item)"
           >
           mdi-delete
           </v-icon>
         </template>
+        <v-dialog v-model="dialogDelete" max-width="500px">
+                <v-card>
+                  <v-card-title class="text-h5">削除しますか？</v-card-title>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="closeDelete()">キャンセル</v-btn>
+                    <v-btn text @click="deleteItemConfirm()">はい</v-btn>
+                    <v-spacer></v-spacer>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
         </v-data-table>
       </v-card>
     </v-app>
@@ -172,6 +183,9 @@ export default {
           sortable: true,
           value: "res"
         },
+        { text: 'Actions',
+          value: 'actions',
+          sortable: false },
       ],
       items:[],
       game_title: null,
@@ -186,12 +200,38 @@ export default {
       res:null,
       
       loading: true,
-
+      editedIndex: 0,
+      dialogDelete: false,
       success: false,
 
       //入力ルール
       required: value => !!value || "必ず入力してください",//入力必須
       // limit_length: value => value.length <= 10 || "10文字以内で入力してください"//文字数の制限
+
+      editedItem: {
+        game_title: null,
+        mouse: null,
+        dpi: null,
+        mouse_sens: null,
+        multi_sens: null,
+        hz:null,
+        mouse_pad: null,
+        keyboard: null,
+        fov:null,
+        res:null,
+      },
+      defaultItem: {
+        game_title: null,
+        mouse: null,
+        dpi: null,
+        mouse_sens: null,
+        multi_sens: null,
+        hz:null,
+        mouse_pad: null,
+        keyboard: null,
+        fov:null,
+        res:null,
+      },
     }
   },
   methods: {
@@ -226,10 +266,41 @@ export default {
 
     deleteItem (item) {
       this.editedIndex = this.items.indexOf(item)
-      console.log(this.editexIndex+"Index");
+      console.log(this.editedIndex+"Index");
       this.editedItem = Object.assign({}, item)
-      console.log(this.editexItem+"Item");
+      console.log(this.editedItem+"Item");
       this.dialogDelete = true
+    },
+    deleteItemConfirm () {
+        this.desserts.splice(this.editedIndex, 1)
+        this.closeDelete()
+    },
+    closeDelete () {
+        this.dialogDelete = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+    },
+    deleteItemConfirm () {
+      const testid = Object.assign(this.items[this.editedIndex].id);
+        console.log(Object.assign(this.items[this.editedIndex].id));
+        console.log(Object.assign(this.items[this.editedIndex], this.editedItem));
+        Object.assign(this.items[this.editedIndex], this.editedItem)
+        const sendData = Object.assign(this.items[this.editedIndex])
+        this.items.splice(this.editedIndex, 1)
+         console.log(this.items);
+        try {
+          this.$axios.delete('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting/' + testid, sendData)
+          .then( res => {
+            console.log(res);
+            console.log("success");
+          }
+          )
+        } catch (error) {
+          console.log(error);
+        }
+      this.closeDelete()
     },
 
     async asyncData(){
@@ -243,6 +314,12 @@ export default {
     .catch(error => console.log(error))
     }
   },
+  watch: {
+    dialogDelete (val) {
+      val || this.closeDelete()
+    },
+  },
+
   mounted: function(){
     
     this.asyncData()
