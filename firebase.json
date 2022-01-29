@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "prosettinglist",
     "public": "dist",
     "ignore": [
       "firebase.json",
