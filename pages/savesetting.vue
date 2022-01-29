@@ -92,6 +92,17 @@
           </v-expansion-panel>
         </v-expansion-panels>
       </v-card>
+      <v-dialog v-model="dialogDelete" max-width="500px">
+        <v-card>
+          <v-card-title class="text-h5">削除しますか？</v-card-title>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text @click="closeDelete()">キャンセル</v-btn>
+            <v-btn text @click="deleteItemConfirm()">はい</v-btn>
+            <v-spacer></v-spacer>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-card>
         <v-data-table
           :headers="headers"
@@ -110,17 +121,6 @@
           mdi-delete
           </v-icon>
         </template>
-        <v-dialog v-model="dialogDelete" max-width="500px">
-                <v-card>
-                  <v-card-title class="text-h5">削除しますか？</v-card-title>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn text @click="closeDelete()">キャンセル</v-btn>
-                    <v-btn text @click="deleteItemConfirm()">はい</v-btn>
-                    <v-spacer></v-spacer>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
         </v-data-table>
       </v-card>
     </v-app>
