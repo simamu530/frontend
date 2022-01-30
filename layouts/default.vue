@@ -50,6 +50,13 @@
       </v-btn> -->
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <div>
+      <NuxtLink to="/register">新規登録</NuxtLink>
+      <NuxtLink to="/login">ログイン</NuxtLink>
+      <NuxtLink to="/logout">ログアウト</NuxtLink>
+      <v-btn v-if="isLogin">ログアウト</v-btn>
+      <v-spacer />
+      </div>
       <!-- <v-btn
         icon
         @click.stop="rightDrawer = !rightDrawer"
@@ -92,6 +99,7 @@
 export default {
   data () {
     return {
+      isLogin: false,
       clipped: false,
       drawer: false,
       fixed: false,
@@ -116,6 +124,14 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Pro Setting List'
+    }
+  },
+  async mounted () {
+    await auth.onAuthStateChanged((user) => this.isLogin = user ? true :false)
+  },
+  methods: {
+    async logout() {
+      await auth.
     }
   }
 }

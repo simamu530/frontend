@@ -3,12 +3,6 @@
 <template>
   <div id="mySettings">
     <v-app>
-      
-      <div class="container">
-        <h1>ホーム</h1>
-        <NuxtLink to="/register">新規登録</NuxtLink>
-      </div>
-
       <v-card>
         <v-card-title align="center">現在の設定状況</v-card-title>
         <v-expansion-panels>

@@ -1,5 +1,15 @@
 <template>
+  
   <v-main>
+    <v-app-bar></v-app-bar>
+      <div class="container">
+      <h1>ホーム</h1>
+      <NuxtLink to="/register">新規登録</NuxtLink>
+      <br />
+      <NuxtLink to="/login">ログイン</NuxtLink>
+      <br />
+      <NuxtLink to="/logout">ログアウト</NuxtLink>
+  </div>
     <v-app id="apexTable">
       <v-container>
         <v-row class="avgarea">
@@ -309,6 +319,8 @@
 </template>
 
 <script>
+import firebase from '~/plugins/firebase'
+
 export default {
   data() {
     return {
@@ -386,6 +398,7 @@ export default {
         keyboard: '',
         headset: '',
       },
+      message: 'ログインができておりません',
     }
   },
   computed: {
@@ -536,6 +549,12 @@ export default {
   created() {
     this.asyncData();
     this.initialize();
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.message = 'ログイン済みです'
+      }
+    })
   },
 }
 </script>
