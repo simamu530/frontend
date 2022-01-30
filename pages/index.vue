@@ -1,15 +1,6 @@
 <template>
   
   <v-main>
-    <v-app-bar></v-app-bar>
-      <div class="container">
-      <h1>ホーム</h1>
-      <NuxtLink to="/register">新規登録</NuxtLink>
-      <br />
-      <NuxtLink to="/login">ログイン</NuxtLink>
-      <br />
-      <NuxtLink to="/logout">ログアウト</NuxtLink>
-  </div>
     <v-app id="apexTable">
       <v-container>
         <v-row class="avgarea">
@@ -96,6 +87,7 @@
                     class="mb-2"
                     v-bind="attrs"
                     v-on="on"
+                    v-if="disIcon"
                   >
                   追加
                   </v-btn>
@@ -289,7 +281,7 @@
               </v-dialog>
           </v-toolbar>
           </template>
-          <template v-slot:item.actions="{ item }">
+          <template v-slot:item.actions="{ item }" v-if="disIcon">
             <v-icon
               small
               class="mr-2"
@@ -399,6 +391,7 @@ export default {
         headset: '',
       },
       message: 'ログインができておりません',
+      disIcon: false,
     }
   },
   computed: {
@@ -554,7 +547,10 @@ export default {
       if (user) {
         this.message = 'ログイン済みです'
       }
-    })
+    });
+  },
+  async mounted () {
+    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
   },
 }
 </script>

@@ -51,10 +51,10 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <div>
-      <NuxtLink to="/register">新規登録</NuxtLink>
-      <NuxtLink to="/login">ログイン</NuxtLink>
-      <NuxtLink to="/logout">ログアウト</NuxtLink>
-      <v-btn v-if="isLogin">ログアウト</v-btn>
+      <v-btn to="/register" color="primary">新規登録</v-btn>
+      <v-btn to="/login" >ログイン</v-btn>
+      <v-btn v-if="isLogin" @click="logout()">ログアウト</v-btn>
+      <!-- <v-btn v-if="isLogin">ログアウト</v-btn> -->
       <v-spacer />
       </div>
       <!-- <v-btn
@@ -96,6 +96,8 @@
 </template>
 
 <script>
+import firebase from '~/plugins/firebase'
+
 export default {
   data () {
     return {
@@ -127,12 +129,17 @@ export default {
     }
   },
   async mounted () {
-    await auth.onAuthStateChanged((user) => this.isLogin = user ? true :false)
+    await firebase.auth().onAuthStateChanged((user) => this.isLogin = user ? true :false)
   },
   methods: {
     async logout() {
-      await auth.
+      await firebase.auth().signOut()
+      .then(() => {
+          alert('ログアウトが完了しました')
+          this.$router.push('/')
+        })
     }
-  }
+  },
+  
 }
 </script>

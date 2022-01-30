@@ -115,7 +115,7 @@
           :loading="loading"
           loading-text="Loading... Please wait"
         >
-        <template v-slot:item.actions="{ item }">
+        <template v-slot:item.actions="{ item }" v-if="disIcon">
           <v-icon
           small
           @click="deleteItem(item)"
@@ -130,6 +130,7 @@
 </template>
 
 <script>
+import firebase from "~/plugins/firebase"
 
 export default {
   data:function() {
@@ -205,6 +206,7 @@ export default {
       editedIndex: -1,
       dialogDelete: false,
       success: false,
+      disIcon: false,
 
       //入力ルール
       required: value => !!value || "必ず入力してください",//入力必須
@@ -312,7 +314,9 @@ export default {
       this.loading = false;
     })
     .catch(error => console.log(error))
-    }
+    },
+
+
   },
   watch: {
     dialogDelete (val) {
@@ -320,9 +324,14 @@ export default {
     },
   },
 
-  mounted: function(){
+  // mounted: function(){
     
+  //   this.asyncData()
+  // },
+  async mounted () {
     this.asyncData()
+    
+    await firebase.auth().onAuthStateChanged((user) => this.isLogin = user ? true :false)
   },
 }
 </script>
