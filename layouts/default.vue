@@ -52,7 +52,7 @@
       <v-spacer />
       <div>
       <v-btn to="/register" color="primary">新規登録</v-btn>
-      <v-btn to="/login" >ログイン</v-btn>
+      <v-btn to="/login" v-if="wasLogin" >ログイン</v-btn>
       <v-btn v-if="isLogin" @click="logout()">ログアウト</v-btn>
       <!-- <v-btn v-if="isLogin">ログアウト</v-btn> -->
       <v-spacer />
@@ -102,6 +102,7 @@ export default {
   data () {
     return {
       isLogin: false,
+      wasLogin: false,
       clipped: false,
       drawer: false,
       fixed: false,
@@ -130,6 +131,7 @@ export default {
   },
   async mounted () {
     await firebase.auth().onAuthStateChanged((user) => this.isLogin = user ? true :false)
+    await firebase.auth().onAuthStateChanged((user) => this.wasLogin = user ? false :true)
   },
   methods: {
     async logout() {
