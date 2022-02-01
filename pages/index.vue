@@ -65,6 +65,7 @@
             sort-by="name"
             hide-default-footer
             class="elevation-1"
+            v-if="delHead"
             >
             <template v-slot:top>
               <v-toolbar
@@ -394,6 +395,7 @@ export default {
       },
       message: 'ログインができておりません',
       disIcon: false,
+      delHead: false,
     }
   },
   computed: {
@@ -540,7 +542,7 @@ export default {
     },
 
     headersSwitch() {
-      this.headers[14] = false;
+      this.delHead = this.headers.pop()
     }
 
     //10.21追加
@@ -559,7 +561,7 @@ export default {
   },
   async mounted () {
     await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
-    await firebase.auth().onAuthStateChanged((user) => this.headers[14] = user ? true : false);
+    await firebase.auth().onAuthStateChanged((user) => this.delHead= user ? true : false);
   },
 }
 </script>
