@@ -58,252 +58,254 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-data-table
-          :headers="headers"
-          :items="items"
-          sort-by="name"
-          hide-default-footer
-          class="elevation-1"
-          >
-          <template v-slot:top>
-            <v-toolbar
-              flat
+          <v-col>
+            <v-data-table
+            :headers="headers"
+            :items="items"
+            sort-by="name"
+            hide-default-footer
+            class="elevation-1"
             >
-            <v-toolbar-title>Apex Pro Settings</v-toolbar-title>
-            <v-divider
-              class="mx-4"
-              inset
-              vertical
-              ></v-divider>
-              <v-spacer></v-spacer>
-              <v-dialog
-                v-model="dialog"
-                max-width="500px"
+            <template v-slot:top>
+              <v-toolbar
+                flat
               >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    color="primary"
-                    dark
-                    class="mb-2"
-                    v-bind="attrs"
-                    v-on="on"
-                    v-if="disIcon"
-                  >
-                  追加
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-card-title>
-                    <span class="text-h5">{{ formTitle }}</span>
-                  </v-card-title>
-                  <v-card-text>
-                    <v-container>
-                      <v-row>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.team"
-                            label="チーム"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.name"
-                            label="名前"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.dpi"
-                            label="DPI"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.mousesens"
-                            label="マウス感度"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.multisens"
-                            label="倍率感度"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.hz"
-                            label="Hz"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.fov"
-                            label="FOV"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.mouse"
-                            label="マウス"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.monitor"
-                            label="モニター"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.gpu"
-                            label="GPU"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.resolution"
-                            label="解像度"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.mousepad"
-                            label="マウスパッド"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.keyboard"
-                            label="キーボード"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                        >
-                          <v-text-field
-                            v-model="editedItem.headset"
-                            label="ヘッドセット"
-                          ></v-text-field>
-                        </v-col>
-                      </v-row>
-                    </v-container>
-                  </v-card-text>
-
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
+              <v-toolbar-title>Apex Pro Settings</v-toolbar-title>
+              <v-divider
+                class="mx-4"
+                inset
+                vertical
+                ></v-divider>
+                <v-spacer></v-spacer>
+                <v-dialog
+                  v-model="dialog"
+                  max-width="500px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                      text
-                      @click="close"
-                    >
-                    キャンセル
-                    </v-btn>
-                    <v-btn
-                      text
-                      @click="addItem()"
-                      v-if="editedIndex == -1"
+                      color="primary"
+                      dark
+                      class="mb-2"
+                      v-bind="attrs"
+                      v-on="on"
+                      v-if="none_icon"
                     >
                     追加
                     </v-btn>
-                    <v-btn
-                      text
-                      @click="save"
-                      v-else
-                    >
-                    更新
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-              <v-dialog v-model="dialogDelete" max-width="500px">
-                <v-card>
-                  <v-card-title class="text-h5">削除しますか？</v-card-title>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn text @click="closeDelete">キャンセル</v-btn>
-                    <v-btn text @click="deleteItemConfirm">はい</v-btn>
-                    <v-spacer></v-spacer>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-          </v-toolbar>
-          </template>
-          <template v-slot:item.actions="{ item }" v-if="disIcon">
-            <v-icon
-              small
-              class="mr-2"
-              @click="editItem(item)"
-            >
-            mdi-pencil
-            </v-icon>
-            <v-icon
-              small
-              @click="deleteItem(item)"
-            >
-            mdi-delete
-            </v-icon>
-          </template>
-          <template v-slot:no-data>
-            <v-btn
-              @click="initialize"
-            >
-            リセット
-            </v-btn>
-          </template>
-          </v-data-table>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">{{ formTitle }}</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-container>
+                        <v-row>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.team"
+                              label="チーム"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.name"
+                              label="名前"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.dpi"
+                              label="DPI"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.mousesens"
+                              label="マウス感度"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.multisens"
+                              label="倍率感度"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.hz"
+                              label="Hz"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.fov"
+                              label="FOV"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.mouse"
+                              label="マウス"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.monitor"
+                              label="モニター"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.gpu"
+                              label="GPU"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.resolution"
+                              label="解像度"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.mousepad"
+                              label="マウスパッド"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.keyboard"
+                              label="キーボード"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
+                          >
+                            <v-text-field
+                              v-model="editedItem.headset"
+                              label="ヘッドセット"
+                            ></v-text-field>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        text
+                        @click="close"
+                      >
+                      キャンセル
+                      </v-btn>
+                      <v-btn
+                        text
+                        @click="addItem()"
+                        v-if="editedIndex == -1"
+                      >
+                      追加
+                      </v-btn>
+                      <v-btn
+                        text
+                        @click="save"
+                        v-else
+                      >
+                      更新
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialogDelete" max-width="500px">
+                  <v-card>
+                    <v-card-title class="text-h5">削除しますか？</v-card-title>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn text @click="closeDelete">キャンセル</v-btn>
+                      <v-btn text @click="deleteItemConfirm">はい</v-btn>
+                      <v-spacer></v-spacer>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+            </v-toolbar>
+            </template>
+            <template v-slot:item.actions="{ item }" v-if="disIcon">
+              <v-icon
+                small
+                class="mr-2"
+                @click="editItem(item)"
+              >
+              mdi-pencil
+              </v-icon>
+              <v-icon
+                small
+                @click="deleteItem(item)"
+              >
+              mdi-delete
+              </v-icon>
+            </template>
+            <template v-slot:no-data>
+              <v-btn
+                @click="initialize"
+              >
+              リセット
+              </v-btn>
+            </template>
+            </v-data-table>
+          </v-col>
         </v-row>
       </v-container>
     </v-app>
@@ -392,6 +394,7 @@ export default {
       },
       message: 'ログインができておりません',
       disIcon: false,
+      none_icon: false,
     }
   },
   computed: {
@@ -550,7 +553,8 @@ export default {
     });
   },
   async mounted () {
-    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
+    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
+    await firebase.auth().onAuthStateChanged((user) => this.none_icon = user ? true :false)
   },
 }
 </script>
