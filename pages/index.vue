@@ -334,23 +334,7 @@ export default {
       pro_keyboard: null,
       pro_headset: null,
       items:[],
-      headers:[
-        { text: 'チーム', value: 'team'},
-        { text: '名前', value: 'name'},
-        { text: 'DPI', value: 'dpi'},
-        { text: 'マウス感度', value: 'mousesens'},
-        { text: '倍率感度', value: 'multisens'},
-        { text: 'Hz', value: 'hz'},
-        { text: '視野角(FOV)', value: 'fov'},
-        { text: 'マウス', value: 'mouse'},
-        { text: 'モニター', value: 'monitor'},
-        { text: 'GPU', value: 'gpu'},
-        { text: '解像度', value: 'resolution'},
-        { text: 'マウスパッド', value: 'mousepad'},
-        { text: 'キーボード', value: 'keyboard'},
-        { text: 'ヘッドセット', value: 'headset'},
-        { text: 'アクション', value: 'actions', sortable: false },
-      ],
+      headers:null,
       search:'',
       sum:0,
       avg_edpi:0,
@@ -541,17 +525,36 @@ export default {
       this.close()
     },
 
-    headersSwitch() {
-      this.delHead = this.headers.pop()
-    }
-
     //10.21追加
   },
   created() {
     this.asyncData();
     this.initialize();
-    console.log(this.headers[14]);
-    this.headersSwitch();
+    const headers = [
+        { text: 'チーム', value: 'team'},
+        { text: '名前', value: 'name'},
+        { text: 'DPI', value: 'dpi'},
+        { text: 'マウス感度', value: 'mousesens'},
+        { text: '倍率感度', value: 'multisens'},
+        { text: 'Hz', value: 'hz'},
+        { text: '視野角(FOV)', value: 'fov'},
+        { text: 'マウス', value: 'mouse'},
+        { text: 'モニター', value: 'monitor'},
+        { text: 'GPU', value: 'gpu'},
+        { text: '解像度', value: 'resolution'},
+        { text: 'マウスパッド', value: 'mousepad'},
+        { text: 'キーボード', value: 'keyboard'},
+        { text: 'ヘッドセット', value: 'headset'},
+        { text: 'アクション', value: 'actions', sortable: false },
+      ];
+    firebase.auth().onAuthStateChanged((user) =>{
+      if(user) {
+        headers.push({text: 'アクション', value: 'actions', sortable: false});
+      }else{
+        
+      }
+    this.headers = headers
+    });
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -560,8 +563,7 @@ export default {
     });
   },
   async mounted () {
-    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
-    await firebase.auth().onAuthStateChanged((user) => this.delHead= user ? true : false);
+    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
   },
 }
 </script>
