@@ -88,7 +88,7 @@
                       class="mb-2"
                       v-bind="attrs"
                       v-on="on"
-                      v-if="none_icon"
+                      v-if="disIcon"
                     >
                     追加
                     </v-btn>
@@ -394,7 +394,6 @@ export default {
       },
       message: 'ログインができておりません',
       disIcon: false,
-      none_icon: false,
     }
   },
   computed: {
@@ -540,11 +539,17 @@ export default {
       this.close()
     },
 
+    headersSwitch() {
+      this.headers[14] = false;
+    }
+
     //10.21追加
   },
   created() {
     this.asyncData();
     this.initialize();
+    console.log(this.headers[14]);
+    this.headersSwitch();
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -554,7 +559,7 @@ export default {
   },
   async mounted () {
     await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
-    await firebase.auth().onAuthStateChanged((user) => this.none_icon = user ? true :false)
+    await firebase.auth().onAuthStateChanged((user) => this.headers[14] = user ? true : false);
   },
 }
 </script>

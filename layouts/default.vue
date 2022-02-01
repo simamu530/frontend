@@ -135,7 +135,7 @@ export default {
           alert('ログアウトが完了しました')
           this.$router.push('/')
         })
-    }
+    },
   },
   
 }

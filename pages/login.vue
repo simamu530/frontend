@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       if (!this.email || !this.password) {
         alert('メールアドレスまたはパスワードが入力されていません。')
         return
