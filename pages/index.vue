@@ -545,13 +545,13 @@ export default {
         { text: 'マウスパッド', value: 'mousepad'},
         { text: 'キーボード', value: 'keyboard'},
         { text: 'ヘッドセット', value: 'headset'},
-        { text: 'アクション', value: 'actions', sortable: false },
       ];
     firebase.auth().onAuthStateChanged((user) =>{
       if(user) {
         headers.push({text: 'アクション', value: 'actions', sortable: false});
+        firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false)
       }else{
-        
+        headers;
       }
     this.headers = headers
     });
