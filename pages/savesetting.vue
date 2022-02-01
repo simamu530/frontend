@@ -132,7 +132,9 @@
 <script>
 import firebase from "~/plugins/firebase"
 
+
 export default {
+  
   data:function() {
     return {
       headers: [
@@ -333,5 +335,7 @@ export default {
     
     await firebase.auth().onAuthStateChanged((user) => this.isLogin = user ? true :false)
   },
+
+  middleware: 'authenticated'
 }
 </script>
