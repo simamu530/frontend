@@ -65,7 +65,7 @@
             sort-by="name"
             hide-default-footer
             class="elevation-1"
-            v-if="delHead"
+            v-if="headers"
             >
             <template v-slot:top>
               <v-toolbar
@@ -546,15 +546,19 @@ export default {
         { text: 'キーボード', value: 'keyboard'},
         { text: 'ヘッドセット', value: 'headset'},
       ];
+      
+
     firebase.auth().onAuthStateChanged((user) =>{
       if(user) {
         headers.push({text: 'アクション', value: 'actions', sortable: false});
         firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false)
       }else{
-        headers;
+        this.headers = headers
+        console.log(headers);
       }
     this.headers = headers
     });
+    
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {

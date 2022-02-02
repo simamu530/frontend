@@ -52,7 +52,7 @@
       <v-spacer />
       <div>
       <v-btn to="/register" color="primary">新規登録</v-btn>
-      <v-btn to="/login" v-if="wasLogin" >ログイン</v-btn>
+      <v-btn to="/login" v-if="wasLogin">ログイン</v-btn>
       <v-btn v-if="isLogin" @click="logout()">ログアウト</v-btn>
       <!-- <v-btn v-if="isLogin">ログアウト</v-btn> -->
       <v-spacer />

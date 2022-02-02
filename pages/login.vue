@@ -47,7 +47,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           alert('ログインが完了しました')
-          this.$router.push('/')
+          this.$router.replace('/')
         })
         .catch((error) => {
           switch (error.code) {
