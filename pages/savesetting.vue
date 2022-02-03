@@ -115,7 +115,7 @@
           :loading="loading"
           loading-text="Loading... Please wait"
         >
-        <template v-slot:item.actions="{ item }" v-if="disIcon">
+        <template v-slot:item.actions="{ item }">
           <v-icon
           small
           @click="deleteItem(item)"

@@ -65,6 +65,8 @@
             sort-by="name"
             hide-default-footer
             class="elevation-1"
+            :loading="loading"
+            loading-text="Loading... Please wait"
             v-if="headers"
             >
             <template v-slot:top>
@@ -298,13 +300,13 @@
               mdi-delete
               </v-icon>
             </template>
-            <template v-slot:no-data>
+            <!-- <template v-slot:no-data>
               <v-btn
                 @click="initialize"
               >
               リセット
               </v-btn>
-            </template>
+            </template> -->
             </v-data-table>
           </v-col>
         </v-row>
@@ -546,12 +548,11 @@ export default {
         { text: 'キーボード', value: 'keyboard'},
         { text: 'ヘッドセット', value: 'headset'},
       ];
-      
-
+    firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
     firebase.auth().onAuthStateChanged((user) =>{
       if(user) {
         headers.push({text: 'アクション', value: 'actions', sortable: false});
-        firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false)
+        firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false);
       }else{
         this.headers = headers
         console.log(headers);

@@ -1,17 +1,29 @@
 <template>
-  <div class="register">
-    <label
-      >メールアドレス： <input v-model="email" type="email" required
-    /></label>
-    <br />
-    <label
-      >パスワード： <input v-model="password" type="password" required
-    /></label>
-    <br />
-    <button @click="register">新規登録</button>
-    <br />
-    <NuxtLink to="/">戻る</NuxtLink>
-  </div>
+  <v-app>
+    <v-container>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md4>
+          <v-card width="400px" class="mx-auto mt-5" color="">
+            <v-row>
+            <div class="register">
+              <label
+                >メールアドレス： <input v-model="email" type="email" required
+              /></label>
+              <br />
+              <label
+                >パスワード： <input v-model="password" type="password" required
+              /></label>
+              <br />
+              <button @click="register">新規登録</button>
+              <br />
+              <NuxtLink to="/">戻る</NuxtLink>
+            </div>
+            </v-row>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-app>
 </template>
 
 <script>

@@ -133,7 +133,7 @@ export default {
       await firebase.auth().signOut()
       .then(() => {
           alert('ログアウトが完了しました')
-          this.$router.push('/')
+          this.$router.push('/login')
         })
     },
   },
