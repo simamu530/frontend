@@ -1,24 +1,18 @@
 <template>
   <v-app>
-    <v-container>
+    <v-container fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
-          <v-card width="400px" class="mx-auto mt-5" color="">
-            <v-row>
-            <div class="register">
-              <label
-                >メールアドレス： <input v-model="email" type="email" required
-              /></label>
-              <br />
-              <label
-                >パスワード： <input v-model="password" type="password" required
-              /></label>
-              <br />
-              <button @click="register">新規登録</button>
-              <br />
-              <NuxtLink to="/">戻る</NuxtLink>
+          <v-card width="400px" class="mx-auto mt-5 pa-6" color="" outlined>
+            <v-card-title>
+              <h1 class="display-1">新規登録</h1>
+            </v-card-title>           
+            <div class="register" >
+              <v-text-field v-model="email" type="email" required class="" label="email"></v-text-field>
+              <v-text-field input v-model="password" type="password" required label="password"></v-text-field>
+              <v-btn @click="register" color="primary">新規登録</v-btn>
+              <v-btn @click="home">戻る</v-btn>
             </div>
-            </v-row>
           </v-card>
         </v-flex>
       </v-layout>
@@ -66,6 +60,9 @@ export default {
           }
         })
     },
+    home() {
+      this.$router.push('/')
+    }
   },
 }
 </script>

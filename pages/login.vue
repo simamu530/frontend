@@ -3,7 +3,7 @@
     <v-container fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
-          <v-card width="400px" class="mx-auto mt-5" color="">
+          <v-card width="400px" class="mx-auto mt-5 pa-6" color="" outlined>
             <v-card-title>
               <h1 class="display-1">ログイン</h1>
             </v-card-title>
@@ -16,7 +16,7 @@
               label="パスワード"  v-model="password"  prepend-icon="mdi-lock"
               required />
               <v-btn @click="login" color="primary">ログイン</v-btn>
-              <NuxtLink to="/">戻る</NuxtLink>
+              <v-btn @click="home">戻る</v-btn>
             </div>
           </v-card>
         </v-flex>
@@ -51,24 +51,27 @@ export default {
         })
         .catch((error) => {
           switch (error.code) {
-            case 'auth/invalid-email':
-              alert('メールアドレスの形式が違います。')
-              break
-            case 'auth/user-disabled':
-              alert('ユーザーが無効になっています。')
-              break
-            case 'auth/user-not-found':
-              alert('ユーザーが存在しません。')
-              break
-            case 'auth/wrong-password':
-              alert('パスワードが間違っております。')
-              break
-            default:
-              alert('エラーが起きました。しばらくしてから再度お試しください。')
-              break
-          }
-        })
+          case 'auth/invalid-email':
+            alert('メールアドレスの形式が違います。')
+          break
+          case 'auth/user-disabled':
+            alert('ユーザーが無効になっています。')
+          break
+          case 'auth/user-not-found':
+            alert('ユーザーが存在しません。')
+          break
+          case 'auth/wrong-password':
+            alert('パスワードが間違っております。')
+          break
+          default:
+            alert('エラーが起きました。しばらくしてから再度お試しください。')
+          break
+        }
+      })
     },
+    home() {
+      this.$router.push('/')
+    }
   },
 }
 </script>
