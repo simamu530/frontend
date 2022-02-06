@@ -20,7 +20,7 @@
                     400dpi
                     </p>
                     <p class="orange--text">
-                    {{dpi400}}
+                    {{dpi400.toFixed(3)}}
                     </p>
                   </v-col>
                   <v-divider vertical></v-divider>
@@ -30,7 +30,7 @@
                     800dpi
                     </p>
                     <p class="orange--text">
-                    {{dpi800}}
+                    {{dpi800.toFixed(3)}}
                     </p>
                   </v-col>
                   <v-divider vertical></v-divider>
@@ -40,7 +40,7 @@
                     1600dpi
                     </p>
                     <p class="orange--text">
-                    {{dpi1600}}
+                    {{dpi1600.toFixed(3)}}
                     </p>
                   </v-col>
                   <v-divider vertical></v-divider>
@@ -50,7 +50,7 @@
                     平均edpi
                     </p>
                     <p class="orange--text">
-                    {{avg_edpi}}
+                    {{avg_edpi.toFixed(3)}}
                     </p>
                   </v-col>
                 </v-row>
