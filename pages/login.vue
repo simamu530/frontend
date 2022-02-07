@@ -9,6 +9,7 @@
             </v-card-title>
           
             <div class="login">
+              <v-btn @click="google" color="primary" >google</v-btn>
               <v-text-field label="メールアドレス" prepend-icon="mdi-account-circle" v-model="email" type="email" required />
               <v-text-field v-bind:type="showPass ? 'text' : 'password'"
               @click:append="showPass = !showPass"
@@ -71,6 +72,32 @@ export default {
     },
     home() {
       this.$router.push('/')
+    },
+    google() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+        this.$router.push('/')
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
     }
   },
 }
