@@ -7,12 +7,12 @@
             <v-card-title>
               <h1 class="display-1">新規登録</h1>
             </v-card-title>           
-            <div class="register" >
-              <v-text-field v-model="email" type="email" required class="" label="email"></v-text-field>
-              <v-text-field input v-model="password" type="password" required label="password"></v-text-field>
-              <v-btn @click="register" color="primary">新規登録</v-btn>
-              <v-btn @click="home">戻る</v-btn>
-            </div>
+              <div class="register" >
+                <v-text-field v-model="email" type="email" required class="" label="email"></v-text-field>
+                <v-text-field input v-model="password" type="password" required label="password"></v-text-field>
+                <v-btn @click="register" color="primary">新規登録</v-btn>
+                <v-btn @click="home">戻る</v-btn>
+              </div>
           </v-card>
         </v-flex>
       </v-layout>
@@ -22,6 +22,8 @@
 
 <script>
 import firebase from '~/plugins/firebase'
+
+
 export default {
   data() {
     return {
