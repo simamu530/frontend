@@ -10,7 +10,11 @@
           
             <div class="login">
               <v-btn @click="google" color="primary" >google</v-btn>
-              <v-text-field label="メールアドレス" prepend-icon="mdi-account-circle" v-model="email" type="email" required />
+                <ValidationObserver ref="myform">
+                  <validation-provider v-slot="{ errors }" rules="email|required">
+                    <v-text-field label="メールアドレス" prepend-icon="mdi-account-circle" v-model="email" type="email" name="email" required />
+                  </validation-provider>
+                </ValidationObserver>
               <v-text-field v-bind:type="showPass ? 'text' : 'password'"
               @click:append="showPass = !showPass"
               v-bind:append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"

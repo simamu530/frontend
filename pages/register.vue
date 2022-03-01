@@ -8,7 +8,11 @@
               <h1 class="display-1">新規登録</h1>
             </v-card-title>           
               <div class="register" >
-                <v-text-field v-model="email" type="email" required class="" label="email"></v-text-field>
+                <ValidationObserver ref="myform">
+                  <validation-provider v-slot="{ errors }" rules="email|required">
+                    <v-text-field v-model="email" type="email" required class="" label="email" name="email"></v-text-field>
+                  </validation-provider>
+                </ValidationObserver>
                 <v-text-field input v-model="password" type="password" required label="password"></v-text-field>
                 <v-btn @click="register" color="primary">新規登録</v-btn>
                 <v-btn @click="home">戻る</v-btn>
