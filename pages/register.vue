@@ -11,6 +11,7 @@
                 <ValidationObserver ref="myform">
                   <validation-provider v-slot="{ errors }" rules="email|required">
                     <v-text-field v-model="email" type="email" required class="" label="email" name="email"></v-text-field>
+                    <span>{{ errors[0] }}</span>
                   </validation-provider>
                 </ValidationObserver>
                 <v-text-field input v-model="password" type="password" required label="password"></v-text-field>

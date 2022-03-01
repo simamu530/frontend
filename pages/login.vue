@@ -13,6 +13,7 @@
                 <ValidationObserver ref="myform">
                   <validation-provider v-slot="{ errors }" rules="email|required">
                     <v-text-field label="メールアドレス" prepend-icon="mdi-account-circle" v-model="email" type="email" name="email" required />
+                    <span>{{ errors[0] }}</span>
                   </validation-provider>
                 </ValidationObserver>
               <v-text-field v-bind:type="showPass ? 'text' : 'password'"
