@@ -8,15 +8,18 @@
               <h1 class="display-1">新規登録</h1>
             </v-card-title>           
               <div class="register" >
-                <ValidationObserver ref="myform">
+                <validation-observer ref="obs" v-slot="ObserverProps">
                   <validation-provider v-slot="{ errors }" rules="email|required">
-                    <v-text-field v-model="email" type="email" required class="" label="email" name="email"></v-text-field>
+                    <v-text-field v-model="email" type="email" required class="" label="email" name="メールアドレス"></v-text-field>
                     <span>{{ errors[0] }}</span>
                   </validation-provider>
-                </ValidationObserver>
-                <v-text-field input v-model="password" type="password" required label="password"></v-text-field>
-                <v-btn @click="register" color="primary">新規登録</v-btn>
-                <v-btn @click="home">戻る</v-btn>
+                  <validation-provider v-slot="{ errors }" rules="required|min:6">
+                    <v-text-field input v-model="password" type="password" required label="password" name="パスワード" :error-messages="errors"></v-text-field>
+                    <span>{{ errors[0] }}</span>
+                  </validation-provider>
+                    <v-btn @click="register" color="primary" :disabled="ObserverProps.invalid || !ObserverProps.validated">新規登録</v-btn>
+                    <v-btn @click="home">戻る</v-btn>
+                </validation-observer>
               </div>
           </v-card>
         </v-flex>
