@@ -9,13 +9,11 @@
             </v-card-title>           
               <div class="register" >
                 <validation-observer ref="obs" v-slot="ObserverProps">
-                  <validation-provider v-slot="{ errors }" rules="email|required">
-                    <v-text-field v-model="email" type="email" required class="" label="email" name="_email_"></v-text-field>
-                    <span>{{ errors[0] }}</span>
+                  <validation-provider v-slot="{ errors }" rules="email|required" name="メール">
+                    <v-text-field v-model="email" type="email" required class="" label="email" :error-messages="errors"></v-text-field>
                   </validation-provider>
-                  <validation-provider v-slot="{ errors }" rules="required|min:6">
-                    <v-text-field input v-model="password" type="password" required label="password" name='_password_' :error-messages="errors"></v-text-field>
-                    <span>{{ errors[0] }}</span>
+                  <validation-provider v-slot="{ errors }" rules="required|min:6" name="パスワード">
+                    <v-text-field input v-model="password" type="password" required label="password" :error-messages="errors"></v-text-field>
                   </validation-provider>
                     <v-btn @click="register" color="primary" :disabled="ObserverProps.invalid || !ObserverProps.validated">新規登録</v-btn>
                     <v-btn @click="home">戻る</v-btn>

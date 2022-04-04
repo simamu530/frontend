@@ -9,20 +9,21 @@
             </v-card-title>
           
             <div class="login">
-              <v-btn @click="google" color="primary" >google</v-btn>
-                <ValidationObserver ref="myform">
-                  <validation-provider v-slot="{ errors }" rules="email|required">
-                    <v-text-field label="メールアドレス" prepend-icon="mdi-account-circle" v-model="email" type="email" name="email" required />
-                    <span>{{ errors[0] }}</span>
+              <validation-observer ref="obs" v-slot="ObserverProps">
+                <v-btn @click="google" color="primary" >google</v-btn>
+                  <validation-provider v-slot="{ errors }" rules="email|required" name="メール">
+                    <v-text-field label="メールアドレス" prepend-icon="mdi-account-circle" v-model="email" type="email" required :error-messages="errors" />
                   </validation-provider>
-                </ValidationObserver>
-              <v-text-field v-bind:type="showPass ? 'text' : 'password'"
-              @click:append="showPass = !showPass"
-              v-bind:append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
-              label="パスワード"  v-model="password"  prepend-icon="mdi-lock"
-              required />
-              <v-btn @click="login" color="primary">ログイン</v-btn>
-              <v-btn @click="home">戻る</v-btn>
+                  <validation-provider v-slot="{ errors }" rules="required|min:6" name="パスワード">
+                    <v-text-field v-bind:type="showPass ? 'text' : 'password'"
+                    @click:append="showPass = !showPass"
+                    v-bind:append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
+                    label="パスワード"  v-model="password"  prepend-icon="mdi-lock"
+                    required :error-messages="errors"/>
+                  </validation-provider>
+                <v-btn @click="login" color="primary" :disabled="ObserverProps.invalid || !ObserverProps.validated">ログイン</v-btn>
+                <v-btn @click="home">戻る</v-btn>
+              </validation-observer>
             </div>
           </v-card>
         </v-flex>
