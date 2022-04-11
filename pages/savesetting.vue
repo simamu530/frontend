@@ -326,10 +326,7 @@ export default {
     },
   },
 
-  // mounted: function(){
-    
-  //   this.asyncData()
-  // },
+
   async mounted () {
     this.asyncData()
     
