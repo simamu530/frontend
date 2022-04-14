@@ -41,7 +41,7 @@ const AuthProvider: VFC<Props> = ({ children }) => {
   } else {
   　　　 // ログイン確認中
     // 自分で作ったローディングコンポーネントをレンダリングする
-    return <Index />;
+    return <index.vue />;
   }
 };
 
