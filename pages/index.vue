@@ -568,7 +568,15 @@ export default {
     });
   },
   async mounted () {
-    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
+    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      console.log('login417');
+    } else {
+      console.log('logout417');
+    }
+  });   
   },
 }
 </script>
