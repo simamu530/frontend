@@ -572,9 +572,9 @@ export default {
 
     firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log('login417');
+      console.log('login519');
     } else {
-      console.log('logout417');
+      console.log('logout519');
     }
   });   
   },
