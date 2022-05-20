@@ -571,11 +571,15 @@ export default {
     await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
 
     firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      console.log('login519');
+    if (user.admin) {
+      headers.push({text: 'アクション', value: 'actions', sortable: false});
+      firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false);
+      console.log('AdminLogin519');
     } else {
-      console.log('logout519');
+      this.headers = headers
+      console.log('NotAdmin');
     }
+    this.headers = headers
   });   
   },
 }
