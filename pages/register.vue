@@ -47,7 +47,10 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((data) => {
-          data.user.sendEmailVerification().then(() => {
+          data.user.sendEmailVerification().then((userCredential) => { //userCredential.userにfirebaseに作成されたユーザーのデータが入っている
+            // ...ユーザー登録リクエスト送信(api/admin)
+            const body = { ...追加するデータの内容 };
+            await this.$axios.post("https://protected-refuge-26791.herokuapp.com/api/admin", body);
             this.$router.replace('/confirm')
           })
         })
