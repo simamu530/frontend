@@ -109,12 +109,16 @@ export default {
     await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
     firebase.auth().onAuthStateChanged(async function(user) {
       const userId = user.uid;
-      const response = await this.$axios.get("https://protected-refuge-26791.herokuapp.com/api/admin"); // mysqlのusersテーブルからユーザのデータ取得
+      const response = await this.$axios.get("https://protected-refuge-26791.herokuapp.com/api/v1/admin/"+ userId); // mysqlのusersテーブルからユーザのデータ取得
       if(response.data.admin){
         // 管理者の場合
+       alert('管理者です');
       } else {
-        管理者以外の場合
+        // 管理者以外の場合
+        alert('ユーザです');
       }
+      alert('ログインが完了しました')
+      this.$router.push('/')
     });
 },
   },
