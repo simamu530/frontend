@@ -56,7 +56,7 @@ export default {
               password: this.password,
               admin: false
             };
-            await this.$axios.post("https://protected-refuge-26791.herokuapp.com/api/admin", body);
+            await this.$axios.post('https://protected-refuge-26791.herokuapp.com/api/admin', body);
             this.$router.replace('/confirm')
           })
         })
