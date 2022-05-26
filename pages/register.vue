@@ -47,7 +47,7 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((data) => {
-          data.user.sendEmailVerification().then((userCredential) => { //userCredential.userにfirebaseに作成されたユーザーのデータが入っている
+          data.user.sendEmailVerification().then(async(userCredential) => { //userCredential.userにfirebaseに作成されたユーザーのデータが入っている
             // ...ユーザー登録リクエスト送信(api/admin)
             const body = { 
               id: data.user.uid, // firebaseのユーザID
