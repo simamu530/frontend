@@ -109,7 +109,7 @@ export default {
     await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
     firebase.auth().onAuthStateChanged(async function(user) {
       const userId = user.uid;
-      const response = await this.$axios.get("https://protected-refuge-26791.herokuapp.com/api/v1/admin/"+ userId); // mysqlのusersテーブルからユーザのデータ取得
+      const response = await this.$axios.get("http://127.0.0.1:8000/api/v1/admin/"+ userId); // mysqlのusersテーブルからユーザのデータ取得
       if(response.data.admin){
         // 管理者の場合
        alert('管理者です');
