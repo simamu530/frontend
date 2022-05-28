@@ -52,7 +52,16 @@ export default {
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
+        .then(async(res) => {
+          const userId = res.user.uid;
+          const response = await this.$axios.get("http://127.0.0.1:8000/api/v1/admin/"+ userId); // mysqlのusersテーブルからユーザのデータ取得
+          if(response.data.admin){
+          // 管理者の場合
+          alert('管理者です');
+        } else {
+        // 管理者以外の場合
+        alert('ユーザです');
+        }
           alert('ログインが完了しました')
           this.$router.push('/')
         })

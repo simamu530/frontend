@@ -572,14 +572,14 @@ export default {
 
     firebase.auth().onAuthStateChanged(function(user) {
     if (user.admin) {
-      headers.push({text: 'アクション', value: 'actions', sortable: false});
-      firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false);
+      // headers.push({text: 'アクション', value: 'actions', sortable: false});
+      // firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false);
       console.log('AdminLogin519');
     } else {
-      this.headers = headers
+      // this.headers = headers
       console.log('NotAdmin');
     }
-    this.headers = headers
+    // this.headers = headers
   });   
   },
 }
