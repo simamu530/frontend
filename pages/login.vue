@@ -120,6 +120,26 @@ export default {
       const userId = user.uid;
       const response = await this.$axios.get("http://127.0.0.1:8000/api/v1/admin/"+ userId); // mysqlのusersテーブルからユーザのデータ取得
       if(response.data.data.admin){
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Signed in
+          var user = userCredential.user;
+          // ...
+          const currentUser = firebase.auth().currentUser;
+          // E-Mailの確認が取れていない場合は強制サインアウト
+          if (!currentUser.emailVerified) {
+            firebase.auth().signOut()
+          }
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+        });
+        // オブザーバーの登録
+        firebase.auth().onAuthStateChanged(user => {
+          // ログイン状態ならuserが取得できる
+          this.user = user ? user : {}
+        })
         // 管理者の場合
        alert('管理者です');
       } else {
