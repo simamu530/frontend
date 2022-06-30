@@ -382,6 +382,7 @@ export default {
       message: 'ログインができておりません',
       disIcon: false,
       delHead: false,
+      adminState: '',
     }
   },
   computed: {
