@@ -550,15 +550,22 @@ export default {
         { text: 'ヘッドセット', value: 'headset'},
       ];
     firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
-    firebase.auth().onAuthStateChanged((user) =>{
+        firebase.auth().onAuthStateChanged((user) =>{
+       this.disIcon = user ? true :false;
+       this.delHead = user ? true :false;
       if(user) {
+        const response = this.$axios.get("http://127.0.0.1:8000/api/v1/admin/"+ user.uid); // 追記6/30
+        if(response.data.data.admin){ // 追記6/30
+          alert('管理者です'); // 追記6/30
+          this.adminState = response.data.data.admin; // 追記6/30
+        } // 追記
         headers.push({text: 'アクション', value: 'actions', sortable: false});
-        firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false);
+        this.message = 'ログイン済みです';
       }else{
         this.headers = headers
         console.log(headers);
       }
-    this.headers = headers
+      this.headers = headers;
     });
     
 
