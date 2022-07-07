@@ -54,7 +54,7 @@ export default {
               name: 'name',
               email: this.email,
               password: this.password,
-              admin: false
+              admin: false,
             };
             await this.$axios.post("http://127.0.0.1:8000/api/admin", body);
             this.$router.replace('/confirm')
