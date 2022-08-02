@@ -418,12 +418,12 @@ export default {
         headset:this.pro_headset,
       }
       console.log(sendData);
-      await this.$axios.post('http://127.0.0.1:8000/api/v1/apexprolist', sendData).then(res => {console.log(res);
+      await this.$axios.post('https://protected-refuge-26791.herokuapp.com/api/v1/apexprolist', sendData).then(res => {console.log(res);
       })
       this.asyncData();
     },
       async asyncData() {
-      await  this.$axios.get('http://127.0.0.1:8000/api/v1/apexprolist')
+      await  this.$axios.get('https://protected-refuge-26791.herokuapp.com/api/v1/apexprolist')
       .then(res => {
         this.items = res.data.data;
         console.log(res.data);
@@ -446,7 +446,7 @@ export default {
       console.log("test");
       console.log(this.editedItem);//入力項目のデータが取得できてるか、確認
       await
-      this.$axios.post('http://127.0.0.1:8000/api/v1/apexprolist',this.editedItem)
+      this.$axios.post('https://protected-refuge-26791.herokuapp.com/api/v1/apexprolist',this.editedItem)
       .then(()=>{
         this.asyncData();
         this.close(); //データの反映を行うために実装してある
@@ -477,7 +477,7 @@ export default {
         this.items.splice(this.editedIndex, 1)
          console.log(this.items);
         try {
-          this.$axios.delete('http://127.0.0.1:8000/api/v1/apexprolist/' + testid, sendData)
+          this.$axios.delete('https://protected-refuge-26791.herokuapp.com/api/v1/apexprolist/' + testid, sendData)
           .then( res => {
             console.log(res);
             console.log("success");
@@ -513,7 +513,7 @@ export default {
         Object.assign(this.items[this.editedIndex], this.editedItem)
         const sendData = Object.assign(this.items[this.editedIndex])
         try {
-          this.$axios.put('http://127.0.0.1:8000/api/v1/apexprolist/' + testid, sendData)
+          this.$axios.put('https://protected-refuge-26791.herokuapp.com/api/v1/apexprolist/' + testid, sendData)
           .then( res => {
             console.log(res);
             console.log("success");
@@ -554,7 +554,7 @@ export default {
        this.disIcon = user ? true :false;
        this.delHead = user ? true :false;
       if(user) {
-        const response = await this.$axios.get("http://127.0.0.1:8000/api/v1/admin/"+ user.uid);
+        const response = await this.$axios.get("https://protected-refuge-26791.herokuapp.com/api/v1/admin/"+ user.uid);
         if(response.data.data.admin){
           alert('管理者です');
           this.adminState = response.data.data.admin;
