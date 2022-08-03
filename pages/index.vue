@@ -548,42 +548,45 @@ export default {
         { text: 'マウスパッド', value: 'mousepad'},
         { text: 'キーボード', value: 'keyboard'},
         { text: 'ヘッドセット', value: 'headset'},
-      ];
-    firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
-        firebase.auth().onAuthStateChanged(async (user) =>{ // 追記
-       this.disIcon = user ? true :false;
-       this.delHead = user ? true :false;
+    ];
+    // firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false)
+    firebase.auth().onAuthStateChanged(async (user) =>{
+      //  this.disIcon = user ? true :false;
+      this.delHead = user ? true :false;
       if(user) {
         const response = await this.$axios.get("http://127.0.0.1:8000/api/v1/admin/"+ user.uid);
         if(response.data.data.admin){
           alert('管理者です');
           this.adminState = response.data.data.admin;
-        } // 追記
+          this.disIcon = true;
+        }
         headers.push({text: 'アクション', value: 'actions', sortable: false});
         this.message = 'ログイン済みです';
       }else{
         this.headers = headers
-        console.log(headers);
+        console.log('user?');
       }
       this.headers = headers;
+      headers.pop();
+      console.log('no');
     });
     
   },
   async mounted () {
-    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
+  //   await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
 
-    firebase.auth().onAuthStateChanged(function(user) {
-    if (user.admin) {
-      // headers.push({text: 'アクション', value: 'actions', sortable: false});
-      // firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false);
-      console.log('AdminLogin519');
-    } else {
-      // this.headers = headers
-      console.log('NotAdmin');
+  //   firebase.auth().onAuthStateChanged(function(user) {
+  //   if (user.admin) {
+  //     // headers.push({text: 'アクション', value: 'actions', sortable: false});
+  //     // firebase.auth().onAuthStateChanged((user) => this.delHead = user ? true :false);
+  //     console.log('AdminLogin519');
+  //   } else {
+  //     // this.headers = headers
+  //     console.log('NotAdmin');
       
-    }
-    // this.headers = headers
-  });   
+  //   }
+  //   // this.headers = headers
+  // });   
   },
 }
 </script>
