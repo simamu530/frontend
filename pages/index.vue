@@ -559,16 +559,14 @@ export default {
           alert('管理者です');
           this.adminState = response.data.data.admin;
           this.disIcon = true;
+          headers.push({text: 'アクション', value: 'actions', sortable: false});
         }
-        headers.push({text: 'アクション', value: 'actions', sortable: false});
         this.message = 'ログイン済みです';
       }else{
         this.headers = headers
         console.log('user?');
       }
       this.headers = headers;
-      headers.pop();
-      console.log('no');
     });
     
   },
