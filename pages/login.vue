@@ -161,5 +161,5 @@ export default {
       return this.$store.getters['dbState/getDb']
     }
   },
-}
+}//
 </script>
