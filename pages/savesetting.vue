@@ -261,7 +261,7 @@ export default {
         "fov": this.fov,
         "res": this.res,
       }
-      this.$axios.$post('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting', sendData)
+      this.$axios.$post('http://127.0.0.1:8000/api/v1/admin/api/v1/savesetting', sendData)
       .then(this.asyncData)
       .catch(error => console.log(error))
     },
@@ -295,7 +295,7 @@ export default {
         this.items.splice(this.editedIndex, 1)
          console.log(this.items);
         try {
-          this.$axios.delete('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting/' + testid, sendData)
+          this.$axios.delete('http://127.0.0.1:8000/api/v1/admin/api/v1/savesetting/' + testid, sendData)
           .then( res => {
             console.log(res);
             console.log("success");
@@ -309,7 +309,7 @@ export default {
 
     async asyncData(){
       this.loading = true;
-      await this.$axios.$get('https://protected-refuge-26791.herokuapp.com/api/v1/savesetting')
+      await this.$axios.$get('http://127.0.0.1:8000/api/v1/admin/api/v1/savesetting')
     .then(res => {
       this.items = res.data;
       console.log(res)
