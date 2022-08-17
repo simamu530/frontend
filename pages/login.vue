@@ -157,6 +157,7 @@ export default {
   },
   computed: {
     selectedDb() {
+      console.log('selectedDb読み込み');
       return this.$store.getters['dbState/getDb']
     }
   },

@@ -35,7 +35,8 @@ export default {
   plugins: [
     '~/plugins/firebase.js',
     '~/plugins/firebase.auth.js',
-    '~/plugins/vee-validate'
+    '~/plugins/vee-validate',
+    { src: '~/plugins/persistedstate.js', ssr: false}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
