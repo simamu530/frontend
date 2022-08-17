@@ -114,42 +114,51 @@ export default {
         // ...
       });
     },
+
     async mounted () {
-    await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
-    firebase.auth().onAuthStateChanged(async function(user) {
-      const userId = user.uid;
-      const response = await this.$axios.get("https://protected-refuge-26791.herokuapp.com/api/v1/admin/"+ userId); // mysqlのusersテーブルからユーザのデータ取得
-      if(response.data.data.admin){
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // Signed in
-          var user = userCredential.user;
-          // ...
-          const currentUser = firebase.auth().currentUser;
-          // E-Mailの確認が取れていない場合は強制サインアウト
-          if (!currentUser.emailVerified) {
-            firebase.auth().signOut()
-          }
-        })
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-        });
-        // オブザーバーの登録
-        firebase.auth().onAuthStateChanged(user => {
-          // ログイン状態ならuserが取得できる
-          this.user = user ? user : {}
-        })
-        // 管理者の場合
-       alert('管理者です');
-      } else {
-        // 管理者以外の場合
-        alert('ユーザです');
-      }
-      alert('ログインが完了しました')
-      this.$router.push('/')
-    });
-},
+      await firebase.auth().onAuthStateChanged((user) => this.disIcon = user ? true :false);
+      firebase.auth().onAuthStateChanged(async function(user) {
+        const userId = user.uid;
+        const response = await this.$axios.get("https://protected-refuge-26791.herokuapp.com/api/v1/admin/"+ userId); // mysqlのusersテーブルからユーザのデータ取得
+        if(response.data.data.admin){
+          firebase.auth().signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            // ...
+            const currentUser = firebase.auth().currentUser;
+            // E-Mailの確認が取れていない場合は強制サインアウト
+            if (!currentUser.emailVerified) {
+              firebase.auth().signOut()
+            }
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+          });
+          // オブザーバーの登録
+          firebase.auth().onAuthStateChanged(user => {
+            // ログイン状態ならuserが取得できる
+            this.user = user ? user : {}
+          })
+          // 管理者の場合
+        alert('管理者です');
+        } else {
+          // 管理者以外の場合
+          alert('ユーザです');
+        }
+        alert('ログインが完了しました')
+        this.$router.push('/')
+      });
+    },
+    selectDb(db) {
+      this.$store.commit('dbState/setDb', db)
+    },
+  },
+  computed: {
+    selectedDb() {
+      return this.$store.getters['dbState/getDb']
+    }
   },
 }
 </script>
