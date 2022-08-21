@@ -2,19 +2,19 @@
 
 //データの設定
 export const state = () => ({
-  selectDb: null
+  isAdmin: false
 });
 
 //データの更新
 export const mutations = {
-  setDb(state, db) {
-    state.selectDb = db;
+  setIsAdmin(state, bool) {
+    state.isAdmin = bool;
   }
 };
 
 //データの取得
 export const getters = {
-  getDb(state) {
-    return state.selectDb;
+  getIsAdmin(state) {
+    return state.isAdmin;
   }
 }
