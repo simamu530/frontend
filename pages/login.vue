@@ -48,6 +48,7 @@
                   >ログイン</v-btn
                 >
                 <v-btn @click="home">戻る</v-btn>
+                <v-btn v-if="isAdmin">管理者用ボタン</v-btn>
               </validation-observer>
             </div>
           </v-card>

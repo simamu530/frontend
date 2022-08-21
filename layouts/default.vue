@@ -24,17 +24,13 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
+    <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <!-- <v-btn
         icon
         @click.stop="miniVariant = !miniVariant"
       > -->
-        <!-- <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon> -->
+      <!-- <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon> -->
       <!-- </v-btn> -->
       <!-- <v-btn
         icon
@@ -51,11 +47,11 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <div>
-      <v-btn to="/register" color="primary">新規登録</v-btn>
-      <v-btn to="/login" v-if="wasLogin">ログイン</v-btn>
-      <v-btn v-if="isLogin" @click="logout()">ログアウト</v-btn>
-      <!-- <v-btn v-if="isLogin">ログアウト</v-btn> -->
-      <v-spacer />
+        <v-btn to="/register" color="primary">新規登録</v-btn>
+        <v-btn to="/login" v-if="wasLogin">ログイン</v-btn>
+        <v-btn v-if="isLogin" @click="logout()">ログアウト</v-btn>
+        <!-- <v-btn v-if="isLogin">ログアウト</v-btn> -->
+        <v-spacer />
       </div>
       <!-- <v-btn
         icon
@@ -86,20 +82,17 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer> -->
-    <v-footer
-      :absolute="!fixed"
-      app
-    >
+    <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import firebase from '~/plugins/firebase'
+import firebase from "~/plugins/firebase";
 
 export default {
-  data () {
+  data() {
     return {
       isLogin: false,
       wasLogin: false,
@@ -108,35 +101,40 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-home',
-          title: 'Home',
-          to: '/'
+          icon: "mdi-home",
+          title: "Home",
+          to: "/",
         },
         {
-          icon: 'mdi-heart-circle',
-          title: 'My Settings',
-          to: '/savesetting'
-        }
+          icon: "mdi-heart-circle",
+          title: "My Settings",
+          to: "/savesetting",
+        },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Pro Setting List'
-    }
+      title: "Pro Setting List",
+    };
   },
-  async mounted () {
-    await firebase.auth().onAuthStateChanged((user) => this.isLogin = user ? true :false)
-    await firebase.auth().onAuthStateChanged((user) => this.wasLogin = user ? false :true)
+  async mounted() {
+    await firebase
+      .auth()
+      .onAuthStateChanged((user) => (this.isLogin = user ? true : false));
+    await firebase
+      .auth()
+      .onAuthStateChanged((user) => (this.wasLogin = user ? false : true));
   },
   methods: {
     async logout() {
-      await firebase.auth().signOut()
-      .then(() => {
-          alert('ログアウトが完了しました')
-          this.$router.push('/login')
-        })
+      await firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          alert("ログアウトが完了しました");
+          this.$router.push("/login");
+        });
     },
   },
-  
-}
+};
 </script>
