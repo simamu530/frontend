@@ -48,7 +48,7 @@
                   >ログイン</v-btn
                 >
                 <v-btn @click="home">戻る</v-btn>
-                <v-btn v-if="isAdmin">管理者用ボタン</v-btn>
+                <v-btn v-if="isAdmin" v-on:click="adminRegister">管理者用ボタン</v-btn>
               </validation-observer>
             </div>
           </v-card>
@@ -116,6 +116,9 @@ export default {
     },
     home() {
       this.$router.push("/");
+    },
+    adminRegister() {
+      this.$router.push('/adminRegister');
     },
     google() {
       var provider = new firebase.auth.GoogleAuthProvider();
