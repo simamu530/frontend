@@ -80,7 +80,7 @@ export default {
         .then(async (res) => {
           const userId = res.user.uid;
           const response = await this.$axios.get(
-            "http://127.0.0.1:8000/api/v1/admin/" + userId
+            "https://protected-refuge-26791.herokuapp.com/api/v1/admin/" + userId
           ); // mysqlのusersテーブルからユーザのデータ取得
           if (response.data.data.admin) {
             // 管理者の場合
@@ -155,7 +155,7 @@ export default {
       firebase.auth().onAuthStateChanged(async function (user) {
         const userId = user.uid;
         const response = await this.$axios.get(
-          "http://127.0.0.1:8000/api/v1/admin/" + userId
+          "https://protected-refuge-26791.herokuapp.com/api/v1/admin/" + userId
         ); // mysqlのusersテーブルからユーザのデータ取得
         if (response.data.data.admin) {
           firebase

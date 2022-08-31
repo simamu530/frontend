@@ -17,4 +17,11 @@ export const getters = {
   getIsAdmin(state) {
     return state.isAdmin;
   }
+};
+
+//時間経過でログイン状態変化
+export const loggetter = {
+  expired(state) {
+    
+  }
 }
