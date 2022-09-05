@@ -48,7 +48,9 @@
                   >ログイン</v-btn
                 >
                 <v-btn @click="home">戻る</v-btn>
-                <v-btn v-if="isAdmin" v-on:click="adminRegister">管理者用ボタン</v-btn>
+                <v-btn v-if="isAdmin" v-on:click="adminRegister"
+                  >管理者用ボタン</v-btn
+                >
               </validation-observer>
             </div>
           </v-card>
@@ -66,6 +68,7 @@ export default {
       email: null,
       password: null,
       showPass: false,
+      expired: null,
     };
   },
   methods: {
@@ -182,13 +185,25 @@ export default {
           });
           // 管理者の場合
           alert("管理者です");
+          this.$store.commit("dbState/setIsAdmin",true);
         } else {
           // 管理者以外の場合
           alert("ユーザです");
+          this.$store.commit("dbState/setIsAdmin",false);
         }
+        this.$store.setExpired("dbState/setIsAdmin",{{this.expired}});
         alert("ログインが完了しました");
         this.$router.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
       });
+      anHourLater() {
+        let dt = new Date();
+        let ts = dt.getTime();
+        let ts_after = ts + (1000 * 60 * 60 * 1);
+        return this.expired
+      },
     },
   },
   computed: {
