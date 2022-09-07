@@ -83,8 +83,8 @@ export default {
         .then(async (res) => {
           const userId = res.user.uid;
           const response = await this.$axios.get(
-            "https://protected-refuge-26791.herokuapp.com/api/v1/admin/" + userId
-          ); // mysqlのusersテーブルからユーザのデータ取得
+            "http://localhost:8000/api/v1/admin/" + userId
+          ); // mysqlのusersテーブルからユーザのデータ取得z
           if (response.data.data.admin) {
             // 管理者の場合
             alert("管理者です");
@@ -94,6 +94,7 @@ export default {
             alert("ユーザです");
             this.$store.commit("dbState/setIsAdmin", false);
           }
+          this.$store.commit("dbState/setExpired", this.anHourLater()); // 追記
           alert("ログインが完了しました");
           //this.$router.push('/')
         })
@@ -121,7 +122,7 @@ export default {
       this.$router.push("/");
     },
     adminRegister() {
-      this.$router.push('/adminRegister');
+      this.$router.push("/adminRegister");
     },
     google() {
       var provider = new firebase.auth.GoogleAuthProvider();
@@ -150,60 +151,11 @@ export default {
           // ...
         });
     },
-
-    async mounted() {
-      await firebase
-        .auth()
-        .onAuthStateChanged((user) => (this.disIcon = user ? true : false));
-      firebase.auth().onAuthStateChanged(async function (user) {
-        const userId = user.uid;
-        const response = await this.$axios.get(
-          "https://protected-refuge-26791.herokuapp.com/api/v1/admin/" + userId
-        ); // mysqlのusersテーブルからユーザのデータ取得
-        if (response.data.data.admin) {
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-              // Signed in
-              var user = userCredential.user;
-              // ...
-              const currentUser = firebase.auth().currentUser;
-              // E-Mailの確認が取れていない場合は強制サインアウト
-              if (!currentUser.emailVerified) {
-                firebase.auth().signOut();
-              }
-            })
-            .catch((error) => {
-              var errorCode = error.code;
-              var errorMessage = error.message;
-            });
-          // オブザーバーの登録
-          firebase.auth().onAuthStateChanged((user) => {
-            // ログイン状態ならuserが取得できる
-            this.user = user ? user : {};
-          });
-          // 管理者の場合
-          alert("管理者です");
-          this.$store.commit("dbState/setIsAdmin",true);
-        } else {
-          // 管理者以外の場合
-          alert("ユーザです");
-          this.$store.commit("dbState/setIsAdmin",false);
-        }
-        this.$store.setExpired("dbState/setIsAdmin",{{this.expired}});
-        alert("ログインが完了しました");
-        this.$router.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      anHourLater() {
-        let dt = new Date();
-        let ts = dt.getTime();
-        let ts_after = ts + (1000 * 60 * 60 * 1);
-        return this.expired
-      },
+    anHourLater() {
+      let dt = new Date();
+      let ts = dt.getTime();
+      let ts_after = ts + 1000 * 60 * 60 * 1;
+      return ts_after;
     },
   },
   computed: {
