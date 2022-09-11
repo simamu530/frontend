@@ -1,11 +1,21 @@
-export default function (context) {
+export default function ({ redirect, store, route }) {
+  const user = store.state.user
+  if(!user && route.path !== '/login') {
+    redirect('/login')
+  }
+  if (route.path !== '/login') {
+    redirect('/login')
+  }
 
-  let dt = new Date();
-  let ts = dt.getTime();
-  let ts_after = ts + 1000 * 60 * 60 * 1;
+  //storeに保存してる内容
+  let getExpired = store.state.dbState.expired;
 
-  if (ts) {
-    ts !== ts_after;
-    
+  //現在時刻より前の場合（expire<now）
+  const nowDate = new Date();
+  const expireDate = new Date(getExpired);
+
+  //ログインページにリダイレクト
+  if (expireDate <= nowDate) {
+    redirect('/login');
   }
 }
