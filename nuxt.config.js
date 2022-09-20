@@ -122,7 +122,4 @@ export default {
     ],
   },
 
-  router: {
-    middleware: 'logoutOneHourLater'
-  },
 }

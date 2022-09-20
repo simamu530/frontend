@@ -6,19 +6,46 @@
           <v-card width="400px" class="mx-auto mt-5 pa-6" color="" outlined>
             <v-card-title>
               <h1 class="display-1">新規登録</h1>
-            </v-card-title>           
-              <div class="register" >
-                <validation-observer ref="obs" v-slot="ObserverProps">
-                  <validation-provider v-slot="{ errors }" rules="email|required" name="メール">
-                    <v-text-field v-model="email" type="email" required class="" label="email" :error-messages="errors"></v-text-field>
-                  </validation-provider>
-                  <validation-provider v-slot="{ errors }" rules="required|min:6" name="パスワード">
-                    <v-text-field input v-model="password" type="password" required label="password" :error-messages="errors"></v-text-field>
-                  </validation-provider>
-                    <v-btn @click="register" color="primary" :disabled="ObserverProps.invalid || !ObserverProps.validated">新規登録</v-btn>
-                    <v-btn @click="home">戻る</v-btn>
-                </validation-observer>
-              </div>
+            </v-card-title>
+            <div class="register">
+              <validation-observer ref="obs" v-slot="ObserverProps">
+                <validation-provider
+                  v-slot="{ errors }"
+                  rules="email|required"
+                  name="メール"
+                >
+                  <v-text-field
+                    v-model="email"
+                    type="email"
+                    required
+                    class=""
+                    label="email"
+                    :error-messages="errors"
+                  ></v-text-field>
+                </validation-provider>
+                <validation-provider
+                  v-slot="{ errors }"
+                  rules="required|min:6"
+                  name="パスワード"
+                >
+                  <v-text-field
+                    input
+                    v-model="password"
+                    type="password"
+                    required
+                    label="password"
+                    :error-messages="errors"
+                  ></v-text-field>
+                </validation-provider>
+                <v-btn
+                  @click="register"
+                  color="primary"
+                  :disabled="ObserverProps.invalid || !ObserverProps.validated"
+                  >新規登録</v-btn
+                >
+                <v-btn @click="home">戻る</v-btn>
+              </validation-observer>
+            </div>
           </v-card>
         </v-flex>
       </v-layout>
@@ -31,6 +58,7 @@ import firebase from '~/plugins/firebase'
 
 
 export default {
+  middleware: [ 'logoutOneHourLater' ],
   data() {
     return {
       email: null,
@@ -49,7 +77,7 @@ export default {
         .then((data) => {
           data.user.sendEmailVerification().then(async(userCredential) => { //userCredential.userにfirebaseに作成されたユーザーのデータが入っている
             // ...ユーザー登録リクエスト送信(api/admin)
-            const body = { 
+            const body = {
               id: data.user.uid, // firebaseのユーザID
               name: 'name',
               email: this.email,

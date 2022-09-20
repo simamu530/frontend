@@ -1,6 +1,6 @@
 export default function ({ redirect, store, route }) {
   // const user = store.state.user
-  if (route.path !== '/login') return
+  if (route.path == '/login') return
 
   //storeに保存してる内容
   let getExpired = store.state.dbState.expired;

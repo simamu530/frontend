@@ -92,6 +92,7 @@
 import firebase from "~/plugins/firebase";
 
 export default {
+  middleware: ["logoutOneHourLater"],
   data() {
     return {
       isLogin: false,

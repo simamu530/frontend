@@ -63,6 +63,7 @@
 <script>
 import firebase from "~/plugins/firebase";
 export default {
+  middleware: [ 'logoutOneHourLater' ],
   data() {
     return {
       email: null,
@@ -83,7 +84,8 @@ export default {
         .then(async (res) => {
           const userId = res.user.uid;
           const response = await this.$axios.get(
-            "http://localhost:8000/api/v1/admin/" + userId
+            "https://protected-refuge-26791.herokuapp.com/api/v1/admin/" +
+              userId
           ); // mysqlのusersテーブルからユーザのデータ取得z
           if (response.data.data.admin) {
             // 管理者の場合

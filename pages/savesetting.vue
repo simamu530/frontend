@@ -1,5 +1,3 @@
-
-
 <template>
   <div id="mySettings">
     <v-app>
@@ -7,86 +5,84 @@
         <v-card-title align="center">現在の設定状況</v-card-title>
         <v-expansion-panels>
           <v-expansion-panel>
-            <v-expansion-panel-header color="primary">入力欄を表示する</v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <v-form ref="setting_form">
-                  <v-card-text>
-                    <v-text-field
-                      v-model="game_title"
-                      label="ゲームタイトル"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="mouse"
-                      label="マウス"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="dpi"
-                      label="DPI"
-                      type="number"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="mouse_sens"
-                      label="マウス感度"
-                      type="number"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="multi_sens"
-                      label="倍率感度"
-                      type="number"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="hz"
-                      label="ポーリングレート(hz)"
-                      type="number"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="mouse_pad"
-                      label="マウスパッド"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="keyboard"
-                      label="キーボード"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="fov"
-                      label="視野角(FOV)"
-                      type="number"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                    <v-text-field
-                      v-model="res"
-                      label="解像度"
-                      :rules="[required]"
-                    >
-                    </v-text-field>
-                  </v-card-text>
-                </v-form>
+            <v-expansion-panel-header color="primary"
+              >入力欄を表示する</v-expansion-panel-header
+            >
+            <v-expansion-panel-content>
+              <v-form ref="setting_form">
+                <v-card-text>
+                  <v-text-field
+                    v-model="game_title"
+                    label="ゲームタイトル"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="mouse"
+                    label="マウス"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="dpi"
+                    label="DPI"
+                    type="number"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="mouse_sens"
+                    label="マウス感度"
+                    type="number"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="multi_sens"
+                    label="倍率感度"
+                    type="number"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="hz"
+                    label="ポーリングレート(hz)"
+                    type="number"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="mouse_pad"
+                    label="マウスパッド"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="keyboard"
+                    label="キーボード"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="fov"
+                    label="視野角(FOV)"
+                    type="number"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                  <v-text-field
+                    v-model="res"
+                    label="解像度"
+                    :rules="[required]"
+                  >
+                  </v-text-field>
+                </v-card-text>
+              </v-form>
               <v-divider></v-divider>
               <v-card-actions>
-                <v-btn
-                  color="cyan darken-1"
-                  class="mr-4"
-                   v-on:click="submit">保存する</v-btn>
-                <v-btn
-                  color="error"
-                  class="mr-4"
-                  @click="reset"
-                >リセット
+                <v-btn color="cyan darken-1" class="mr-4" v-on:click="submit"
+                  >保存する</v-btn
+                >
+                <v-btn color="error" class="mr-4" @click="reset"
+                  >リセット
                 </v-btn>
                 <span v-if="success">保存されました</span>
               </v-card-actions>
@@ -115,14 +111,9 @@
           :loading="loading"
           loading-text="Loading... Please wait"
         >
-        <template v-slot:item.actions="{ item }">
-          <v-icon
-          small
-          @click="deleteItem(item)"
-          >
-          mdi-delete
-          </v-icon>
-        </template>
+          <template v-slot:item.actions="{ item }">
+            <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+          </template>
         </v-data-table>
       </v-card>
     </v-app>
@@ -134,7 +125,7 @@ import firebase from "~/plugins/firebase"
 
 
 export default {
-  
+  middleware: [ 'logoutOneHourLater' ],
   data:function() {
     return {
       headers: [
@@ -203,7 +194,7 @@ export default {
       keyboard: null,
       fov:null,
       res:null,
-      
+
       loading: true,
       editedIndex: -1,
       dialogDelete: false,
@@ -327,12 +318,12 @@ export default {
   },
 
   // mounted: function(){
-    
+
   //   this.asyncData()
   // },
   async mounted () {
     this.asyncData()
-    
+
     await firebase.auth().onAuthStateChanged((user) => this.isLogin = user ? true :false)
   },
 
