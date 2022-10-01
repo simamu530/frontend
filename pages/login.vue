@@ -97,6 +97,7 @@ export default {
             this.$store.commit("dbState/setIsAdmin", false);
           }
           this.$store.commit("dbState/setExpired", this.anHourLater()); // 追記
+          this.$store.commit("dbState/setIsLogin", true); // ログイン状態をtrueに変更
           alert("ログインが完了しました");
           //this.$router.push('/')
         })
